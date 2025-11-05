@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Precios - Tu Az InnovationX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --surface-color: #1a1a1a;
+            --card-bg-color: #1f1f1f;
+            --primary-text-color: #e0e0e0;
+            --secondary-text-color: #a0a0a0;
+            --accent-color: #bb86fc;
+            --accent-gradient: linear-gradient(135deg, #bb86fc, #03dac6);
+            --card-border-color: #333333;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --hover-glow: 0 0 25px rgba(187, 134, 252, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--primary-text-color);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--surface-color);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--card-border-color);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--secondary-text-color);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        main {
+            padding: 80px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--hover-glow);
+            border-color: var(--accent-color);
+        }
+
+        .card-header {
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid var(--card-border-color);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--primary-text-color);
+            margin-bottom: 10px;
+        }
+
+        .card-price {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--accent-color);
+        }
+
+        .card-body {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-description {
+            margin-bottom: 25px;
+            color: var(--secondary-text-color);
+            font-weight: 300;
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .benefits-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            color: var(--primary-text-color);
+        }
+
+        .benefits-list i {
+            color: var(--accent-color);
+            margin-right: 12px;
+            margin-top: 3px;
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 80px;
+            padding: 60px 40px;
+            background: var(--accent-gradient);
+            border-radius: 20px;
+            color: var(--bg-color);
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--bg-color);
+            color: var(--primary-text-color);
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        footer {
+            background-color: var(--surface-color);
+            color: var(--secondary-text-color);
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--card-border-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+            text-align: left;
+            padding: 0 15px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            color: var(--primary-text-color);
+            font-weight: 600;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid var(--card-border-color);
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Media Queries para Responsividad */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Precios</h1>
+            <p class="subtitle">Diseño y funcionalidad que cautivan. Tu presencia digital, hecha obra de arte.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="services-grid">
+                <!-- Página Web One Page Profesional -->
+                <div class="service-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h2 class="card-title">Página Web One Page Profesional</h2>
+                        <div class="card-price">💰 Inversión: $2,000 – $3,000 MXN</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Ideal para emprendedores, servicios personales o marcas que buscan presencia digital moderna, estratégica y diseñada para convertir con un mensaje claro e impactante.</p>
+                        <ul class="benefits-list">
+                            <li><i class="fas fa-check-circle"></i> Diseño moderno, responsivo y personalizado</li>
+                            <li><i class="fas fa-check-circle"></i> Secciones estratégicas para captar clientes</li>
+                            <li><i class="fas fa-check-circle"></i> Integración profesional con redes sociales</li>
+                            <li><i class="fas fa-check-circle"></i> Formulario de contacto conectado a correo</li>
+                            <li><i class="fas fa-check-circle"></i> Optimización de velocidad y rendimiento en móviles</li>
+                            <li><i class="fas fa-check-circle"></i> Hosting y subdominio GRATIS</li>
+                            <li><i class="fas fa-check-circle"></i> Despliegue, configuración y soporte inicial</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Página Web Empresarial Premium -->
+                <div class="service-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h2 class="card-title">Página Web Empresarial Premium</h2>
+                        <div class="card-price">💰 Inversión: $2,500 – $3,500 MXN</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Sitio web profesional y corporativo con mayor estructura, credibilidad y herramientas para negocios que desean posicionarse, escalar y vender más.</p>
+                        <ul class="benefits-list">
+                            <li><i class="fas fa-check-circle"></i> Estructura completa con múltiples secciones</li>
+                            <li><i class="fas fa-check-circle"></i> Galería de imágenes optimizada</li>
+                            <li><i class="fas fa-check-circle"></i> SEO básico para aparecer en Google</li>
+                            <li><i class="fas fa-check-circle"></i> Copywriting persuasivo</li>
+                            <li><i class="fas fa-check-circle"></i> Diseño responsive con estilo empresarial</li>
+                            <li><i class="fas fa-check-circle"></i> Sección opcional: clientes, valores, certificaciones o equipo</li>
+                            <li><i class="fas fa-check-circle"></i> Hosting y subdominio GRATIS</li>
+                            <li><i class="fas fa-check-circle"></i> Certificado SSL + configuración profesional de seguridad</li>
+                            <li><i class="fas fa-check-circle"></i> 1 ronda de ajustes de diseño</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tienda Online Básica -->
+                <div class="service-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h2 class="card-title">Tienda Online Básica</h2>
+                        <div class="card-price">💰 Inversión: $2,500 – $3,000 MXN</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Catálogo digital para comenzar a vender en línea de forma rápida, fácil y con presencia profesional.</p>
+                        <ul class="benefits-list">
+                            <li><i class="fas fa-check-circle"></i> Catálogo de productos con diseño profesional</li>
+                            <li><i class="fas fa-check-circle"></i> Carrito sencillo con pagos integrados</li>
+                            <li><i class="fas fa-check-circle"></i> Integración con WhatsApp para pedidos</li>
+                            <li><i class="fas fa-check-circle"></i> Diseño responsive optimizado para compras desde móvil</li>
+                            <li><i class="fas fa-check-circle"></i> Hosting y subdominio GRATIS</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- App Web Android -->
+                <div class="service-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h2 class="card-title">App Web Android</h2>
+                        <div class="card-price">💰 Inversión: $2,800 – $3,700 MXN</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Aplicación web instalable tipo app para Android con acceso directo desde el celular.</p>
+                        <ul class="benefits-list">
+                            <li><i class="fas fa-check-circle"></i> App web instalable (PWA)</li>
+                            <li><i class="fas fa-check-circle"></i> Menú, galería, redes y contacto</li>
+                            <li><i class="fas fa-check-circle"></i> Optimizada para carga rápida</li>
+                            <li><i class="fas fa-check-circle"></i> Hosting y subdominio GRATIS</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Chatbot Web Básico -->
+                <div class="service-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h2 class="card-title">Chatbot Web Básico</h2>
+                        <div class="card-price">💰 Inversión: $500 – $800 MXN</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Chatbot en página web con flujo simple para atención básica, FAQs y guía del usuario.</p>
+                        <ul class="benefits-list">
+                            <li><i class="fas fa-check-circle"></i> Flujo predefinido con respuestas guiadas</li>
+                            <li><i class="fas fa-check-circle"></i> Botones interactivos</li>
+                            <li><i class="fas fa-check-circle"></i> Integración en cualquier web o blog</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Chatbot Avanzado -->
+                <div class="service-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h2 class="card-title">Chatbot Avanzado</h2>
+                        <div class="card-price">💰 Inversión: $800 – $1,200 MXN</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Chatbot con estructura múltiple, diseño personalizado y mayor interacción.</p>
+                        <ul class="benefits-list">
+                            <li><i class="fas fa-check-circle"></i> Menús múltiples y conversaciones avanzadas</li>
+                            <li><i class="fas fa-check-circle"></i> Diseño adaptado a tu marca</li>
+                            <li><i class="fas fa-check-circle"></i> Integración con correo o WhatsApp</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Seguridad Web Básica -->
+                <div class="service-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h2 class="card-title">Seguridad Web Básica</h2>
+                        <div class="card-price">💰 Inversión: $2,800 – $3,800 MXN</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Diagnóstico completo para proteger tu sitio web y evitar vulnerabilidades.</p>
+                        <ul class="benefits-list">
+                            <li><i class="fas fa-check-circle"></i> Análisis de vulnerabilidades del sitio o app</li>
+                            <li><i class="fas fa-check-circle"></i> Reporte con recomendaciones de seguridad</li>
+                            <li><i class="fas fa-check-circle"></i> Configuraciones básicas para mayor protección</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Hosting y Mantenimiento -->
+                <div class="service-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h2 class="card-title">Hosting y Mantenimiento</h2>
+                        <div class="card-price">💰 Inversión: $1,200 – $2,000 MXN</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Servicio para asegurar que tu sitio funcione siempre rápido, seguro y actualizado.</p>
+                        <ul class="benefits-list">
+                            <li><i class="fas fa-check-circle"></i> Configuración, hosting, dominio y optimización</li>
+                            <li><i class="fas fa-check-circle"></i> Mantenimiento y rendimiento continuo</li>
+                            <li><i class="fas fa-check-circle"></i> Respaldo de datos y actualizaciones</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>¿Listo para crear algo extraordinario?</h2>
+                <p>Hablemos de tu proyecto y demos vida a tu visión.</p>
+                <a href="https://wa.me/525620042412?text=Hola%2C%20estoy%20interesado%20en%20solicitar%20una%20p%C3%A1gina%20web.%20Vi%20sus%20precios%20en%20el%20sitio%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n." class="cta-button" target="_blank">Solicitar mi página</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sobre Nosotros</h3>
+                    <p>Somos expertos en soluciones digitales para emprendedores. Creamos sitios web profesionales que ayudan a tu negocio a crecer.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Servicios</a></li>
+                        <li><a href="#">Portafolio</a></li>
+                        <li><a href="#">Testimonios</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> soporteseguro98@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +52 562 004 2412</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Estado de Mexico, Huixquilucan</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Tu Az InnovationX. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
