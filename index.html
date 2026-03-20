@@ -246,6 +246,184 @@
             margin-right: 5px;
         }
 
+        /* NUEVA SECCIÓN CHATBOTS */
+        .chatbots-pricing {
+            margin-top: 80px;
+            padding: 80px 0;
+            background: linear-gradient(180deg, var(--bg-color) 0%, var(--surface-color) 100%);
+            border-top: 1px solid var(--card-border-color);
+            border-bottom: 1px solid var(--card-border-color);
+        }
+
+        .chatbots-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .chatbots-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary-text-color);
+        }
+
+        .chatbots-header h2 span {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .chatbots-slogan {
+            font-size: 1.2rem;
+            color: var(--secondary-text-color);
+            max-width: 800px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        .pricing-cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .pricing-card {
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 20px;
+            padding: 40px 30px;
+            width: 350px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--hover-glow);
+            border-color: var(--accent-color);
+            z-index: 10;
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(145deg, var(--surface-color), #2a2a2a);
+            border: 2px solid var(--accent-color);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(187, 134, 252, 0.2);
+            z-index: 5;
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 15px 40px rgba(187, 134, 252, 0.4);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-gradient);
+            color: var(--bg-color);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(187, 134, 252, 0.4);
+        }
+
+        .pricing-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-text-color);
+        }
+
+        .pricing-icon.basic { color: #4CAF50; }
+        .pricing-icon.standard { color: #2196F3; }
+        .pricing-icon.premium { color: #FF9800; }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-text-color);
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--primary-text-color);
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--secondary-text-color);
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--secondary-text-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li i {
+            color: var(--accent-color);
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+
+        .pricing-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-btn-outline {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .pricing-btn-outline:hover {
+            background: rgba(187, 134, 252, 0.1);
+        }
+
+        .pricing-btn-solid {
+            background: var(--accent-gradient);
+            color: var(--bg-color);
+            border: none;
+        }
+
+        .pricing-btn-solid:hover {
+            box-shadow: 0 8px 20px rgba(187, 134, 252, 0.4);
+            transform: translateY(-2px);
+        }
+
         .cta-section {
             text-align: center;
             margin-top: 80px;
@@ -501,44 +679,6 @@
                     </div>
                 </div>
 
-                <!-- Chatbot Web Básico -->
-                <div class="service-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <h2 class="card-title">Chatbot Web Básico</h2>
-                        <div class="card-price">💰 Inversión: $500 – $800 MXN</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-description">Chatbot en página web con flujo simple para atención básica, FAQs y guía del usuario.</p>
-                        <ul class="benefits-list">
-                            <li><i class="fas fa-check-circle"></i> Flujo predefinido con respuestas guiadas</li>
-                            <li><i class="fas fa-check-circle"></i> Botones interactivos</li>
-                            <li><i class="fas fa-check-circle"></i> Integración en cualquier web o blog</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Chatbot Avanzado -->
-                <div class="service-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <h2 class="card-title">Chatbot Avanzado</h2>
-                        <div class="card-price">💰 Inversión: $800 – $1,200 MXN</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-description">Chatbot con estructura múltiple, diseño personalizado y mayor interacción.</p>
-                        <ul class="benefits-list">
-                            <li><i class="fas fa-check-circle"></i> Menús múltiples y conversaciones avanzadas</li>
-                            <li><i class="fas fa-check-circle"></i> Diseño adaptado a tu marca</li>
-                            <li><i class="fas fa-check-circle"></i> Integración con correo o WhatsApp</li>
-                        </ul>
-                    </div>
-                </div>
-
                 <!-- Seguridad Web Básica -->
                 <div class="service-card">
                     <div class="card-header">
@@ -577,6 +717,62 @@
                     </div>
                 </div>
             </div>
+
+            <!-- NUEVA SECCIÓN DE PRECIOS DE CHATBOTS -->
+            <section class="chatbots-pricing">
+                <div class="container">
+                    <div class="chatbots-header">
+                        <h2>Planes Oficiales de <span>Chatbots</span></h2>
+                        <p class="chatbots-slogan">"Automatiza tu negocio, responde al instante y convierte visitantes en clientes con tecnología inteligente."</p>
+                    </div>
+
+                    <div class="pricing-cards">
+                        <!-- Plan Básico -->
+                        <div class="pricing-card">
+                            <i class="fas fa-robot pricing-icon basic"></i>
+                            <h3 class="pricing-title">🟢 Plan Básico</h3>
+                            <div class="pricing-price">$700 <span>MXN</span></div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check"></i> Chatbot con botones interactivos</li>
+                                <li><i class="fas fa-check"></i> Respuestas automáticas</li>
+                                <li><i class="fas fa-check"></i> Integración en página web o blog</li>
+                                <li><i class="fas fa-check"></i> Diseño funcional</li>
+                            </ul>
+                            <a href="https://wa.me/525620042412?text=Hola%2C%20me%20interesa%20el%20Plan%20Básico%20de%20Chatbot." class="pricing-btn pricing-btn-outline" target="_blank">Elegir Plan</a>
+                        </div>
+
+                        <!-- Plan Estándar (Recomendado) -->
+                        <div class="pricing-card featured">
+                            <div class="pricing-badge">Recomendado</div>
+                            <i class="fas fa-brain pricing-icon standard"></i>
+                            <h3 class="pricing-title">🔵 Plan Estándar</h3>
+                            <div class="pricing-price">$1,200 <span>MXN</span></div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check"></i> Chatbot con Inteligencia Artificial</li>
+                                <li><i class="fas fa-check"></i> Respuestas dinámicas tipo ChatGPT</li>
+                                <li><i class="fas fa-check"></i> Personalización básica</li>
+                                <li><i class="fas fa-check"></i> Mejor diseño y experiencia</li>
+                            </ul>
+                            <a href="https://wa.me/525620042412?text=Hola%2C%20me%20interesa%20el%20Plan%20Estándar%20de%20Chatbot." class="pricing-btn pricing-btn-solid" target="_blank">Elegir Plan</a>
+                        </div>
+
+                        <!-- Plan PRO -->
+                        <div class="pricing-card">
+                            <i class="fas fa-rocket pricing-icon premium"></i>
+                            <h3 class="pricing-title">🔥 Plan PRO (Premium)</h3>
+                            <div class="pricing-price">$1,400 <span>MXN</span></div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check"></i> IA + botones interactivos</li>
+                                <li><i class="fas fa-check"></i> Diseño moderno tipo app</li>
+                                <li><i class="fas fa-check"></i> Integración completa (web, sistemas)</li>
+                                <li><i class="fas fa-check"></i> Animaciones y experiencia premium</li>
+                                <li><i class="fas fa-check"></i> Configuración avanzada personalizada</li>
+                            </ul>
+                            <a href="https://wa.me/525620042412?text=Hola%2C%20me%20interesa%20el%20Plan%20PRO%20de%20Chatbot." class="pricing-btn pricing-btn-outline" target="_blank">Elegir Plan</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <!-- NUEVA SECCIÓN DE PAQUETES RECOMENDADOS -->
             <section class="recommended-packages">
