@@ -285,7 +285,7 @@
         .pricing-cards {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: stretch;
             gap: 30px;
             flex-wrap: wrap;
         }
@@ -300,6 +300,8 @@
             transition: all 0.4s ease;
             position: relative;
             z-index: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .pricing-card:hover {
@@ -344,6 +346,7 @@
             color: var(--primary-text-color);
         }
 
+        .pricing-icon.default { color: var(--accent-color); }
         .pricing-icon.basic { color: #4CAF50; }
         .pricing-icon.standard { color: #2196F3; }
         .pricing-icon.premium { color: #FF9800; }
@@ -368,11 +371,17 @@
             color: var(--secondary-text-color);
         }
 
+        .pricing-description {
+            color: var(--secondary-text-color);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
         .pricing-features {
             list-style: none;
             padding: 0;
             margin: 0 0 30px 0;
             text-align: left;
+            flex-grow: 1;
         }
 
         .pricing-features li {
@@ -380,7 +389,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             color: var(--secondary-text-color);
             display: flex;
-            align-items: center;
+            align-items: flex-start;
         }
 
         .pricing-features li:last-child {
@@ -390,6 +399,7 @@
         .pricing-features li i {
             color: var(--accent-color);
             margin-right: 15px;
+            margin-top: 3px;
             font-size: 1.1rem;
         }
 
@@ -401,6 +411,7 @@
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
+            margin-top: auto;
         }
 
         .pricing-btn-outline {
@@ -589,132 +600,102 @@
 
     <main>
         <div class="container">
-            <div class="services-grid">
+            <div class="pricing-cards">
                 <!-- Página Web One Page Profesional -->
-                <div class="service-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-globe"></i>
-                        </div>
-                        <h2 class="card-title">Página Web One Page Profesional</h2>
-                        <div class="card-price">💰 Inversión: $2,000 – $3,000 MXN</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-description">Ideal para emprendedores, servicios personales o marcas que buscan presencia digital moderna, estratégica y diseñada para convertir con un mensaje claro e impactante.</p>
-                        <ul class="benefits-list">
-                            <li><i class="fas fa-check-circle"></i> Diseño moderno, responsivo y personalizado</li>
-                            <li><i class="fas fa-check-circle"></i> Secciones estratégicas para captar clientes</li>
-                            <li><i class="fas fa-check-circle"></i> Integración profesional con redes sociales</li>
-                            <li><i class="fas fa-check-circle"></i> Formulario de contacto conectado a correo</li>
-                            <li><i class="fas fa-check-circle"></i> Optimización de velocidad y rendimiento en móviles</li>
-                            <li><i class="fas fa-check-circle"></i> Hosting y subdominio GRATIS</li>
-                            <li><i class="fas fa-check-circle"></i> Despliegue, configuración y soporte inicial</li>
-                        </ul>
-                    </div>
+                <div class="pricing-card">
+                    <i class="fas fa-globe pricing-icon default"></i>
+                    <h3 class="pricing-title">Página Web One Page Profesional</h3>
+                    <div class="pricing-price">$2,000 <span> – $3,000 MXN</span></div>
+                    <p class="pricing-description">Ideal para emprendedores, servicios personales o marcas que buscan presencia digital moderna, estratégica y diseñada para convertir con un mensaje claro e impactante.</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Diseño moderno, responsivo y personalizado</li>
+                            <li><i class="fas fa-check"></i> Secciones estratégicas para captar clientes</li>
+                            <li><i class="fas fa-check"></i> Integración profesional con redes sociales</li>
+                            <li><i class="fas fa-check"></i> Formulario de contacto conectado a correo</li>
+                            <li><i class="fas fa-check"></i> Optimización de velocidad y rendimiento en móviles</li>
+                            <li><i class="fas fa-check"></i> Hosting y subdominio GRATIS</li>
+                            <li><i class="fas fa-check"></i> Despliegue, configuración y soporte inicial</li>
+                    </ul>
+                    <a href="https://wa.me/525620042412?text=Hola%2C%20me%20interesa%20Página%20Web%20One%20Page%20Profesional." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Servicio</a>
                 </div>
 
                 <!-- Página Web Empresarial Premium -->
-                <div class="service-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-building"></i>
-                        </div>
-                        <h2 class="card-title">Página Web Empresarial Premium</h2>
-                        <div class="card-price">💰 Inversión: $2,500 – $3,500 MXN</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-description">Sitio web profesional y corporativo con mayor estructura, credibilidad y herramientas para negocios que desean posicionarse, escalar y vender más.</p>
-                        <ul class="benefits-list">
-                            <li><i class="fas fa-check-circle"></i> Estructura completa con múltiples secciones</li>
-                            <li><i class="fas fa-check-circle"></i> Galería de imágenes optimizada</li>
-                            <li><i class="fas fa-check-circle"></i> SEO básico para aparecer en Google</li>
-                            <li><i class="fas fa-check-circle"></i> Copywriting persuasivo</li>
-                            <li><i class="fas fa-check-circle"></i> Diseño responsive con estilo empresarial</li>
-                            <li><i class="fas fa-check-circle"></i> Sección opcional: clientes, valores, certificaciones o equipo</li>
-                            <li><i class="fas fa-check-circle"></i> Hosting y subdominio GRATIS</li>
-                            <li><i class="fas fa-check-circle"></i> Certificado SSL + configuración profesional de seguridad</li>
-                            <li><i class="fas fa-check-circle"></i> 1 ronda de ajustes de diseño</li>
-                        </ul>
-                    </div>
+                <div class="pricing-card">
+                    <i class="fas fa-building pricing-icon default"></i>
+                    <h3 class="pricing-title">Página Web Empresarial Premium</h3>
+                    <div class="pricing-price">$2,500 <span> – $3,500 MXN</span></div>
+                    <p class="pricing-description">Sitio web profesional y corporativo con mayor estructura, credibilidad y herramientas para negocios que desean posicionarse, escalar y vender más.</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Estructura completa con múltiples secciones</li>
+                            <li><i class="fas fa-check"></i> Galería de imágenes optimizada</li>
+                            <li><i class="fas fa-check"></i> SEO básico para aparecer en Google</li>
+                            <li><i class="fas fa-check"></i> Copywriting persuasivo</li>
+                            <li><i class="fas fa-check"></i> Diseño responsive con estilo empresarial</li>
+                            <li><i class="fas fa-check"></i> Sección opcional: clientes, valores, certificaciones o equipo</li>
+                            <li><i class="fas fa-check"></i> Hosting y subdominio GRATIS</li>
+                            <li><i class="fas fa-check"></i> Certificado SSL + configuración profesional de seguridad</li>
+                            <li><i class="fas fa-check"></i> 1 ronda de ajustes de diseño</li>
+                    </ul>
+                    <a href="https://wa.me/525620042412?text=Hola%2C%20me%20interesa%20Página%20Web%20Empresarial%20Premium." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Servicio</a>
                 </div>
 
                 <!-- Tienda Online Básica -->
-                <div class="service-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <h2 class="card-title">Tienda Online Básica</h2>
-                        <div class="card-price">💰 Inversión: $2,500 – $3,000 MXN</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-description">Catálogo digital para comenzar a vender en línea de forma rápida, fácil y con presencia profesional.</p>
-                        <ul class="benefits-list">
-                            <li><i class="fas fa-check-circle"></i> Catálogo de productos con diseño profesional</li>
-                            <li><i class="fas fa-check-circle"></i> Carrito sencillo con pagos integrados</li>
-                            <li><i class="fas fa-check-circle"></i> Integración con WhatsApp para pedidos</li>
-                            <li><i class="fas fa-check-circle"></i> Diseño responsive optimizado para compras desde móvil</li>
-                            <li><i class="fas fa-check-circle"></i> Hosting y subdominio GRATIS</li>
-                        </ul>
-                    </div>
+                <div class="pricing-card">
+                    <i class="fas fa-shopping-cart pricing-icon default"></i>
+                    <h3 class="pricing-title">Tienda Online Básica</h3>
+                    <div class="pricing-price">$2,500 <span> – $3,000 MXN</span></div>
+                    <p class="pricing-description">Catálogo digital para comenzar a vender en línea de forma rápida, fácil y con presencia profesional.</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Catálogo de productos con diseño profesional</li>
+                            <li><i class="fas fa-check"></i> Carrito sencillo con pagos integrados</li>
+                            <li><i class="fas fa-check"></i> Integración con WhatsApp para pedidos</li>
+                            <li><i class="fas fa-check"></i> Diseño responsive optimizado para compras desde móvil</li>
+                            <li><i class="fas fa-check"></i> Hosting y subdominio GRATIS</li>
+                    </ul>
+                    <a href="https://wa.me/525620042412?text=Hola%2C%20me%20interesa%20Tienda%20Online%20Básica." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Servicio</a>
                 </div>
 
                 <!-- App Web Android -->
-                <div class="service-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <h2 class="card-title">App Web Android</h2>
-                        <div class="card-price">💰 Inversión: $2,800 – $3,700 MXN</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-description">Aplicación web instalable tipo app para Android con acceso directo desde el celular.</p>
-                        <ul class="benefits-list">
-                            <li><i class="fas fa-check-circle"></i> App web instalable (PWA)</li>
-                            <li><i class="fas fa-check-circle"></i> Menú, galería, redes y contacto</li>
-                            <li><i class="fas fa-check-circle"></i> Optimizada para carga rápida</li>
-                            <li><i class="fas fa-check-circle"></i> Hosting y subdominio GRATIS</li>
-                        </ul>
-                    </div>
+                <div class="pricing-card">
+                    <i class="fas fa-mobile-alt pricing-icon default"></i>
+                    <h3 class="pricing-title">App Web Android</h3>
+                    <div class="pricing-price">$2,800 <span> – $3,700 MXN</span></div>
+                    <p class="pricing-description">Aplicación web instalable tipo app para Android con acceso directo desde el celular.</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> App web instalable (PWA)</li>
+                            <li><i class="fas fa-check"></i> Menú, galería, redes y contacto</li>
+                            <li><i class="fas fa-check"></i> Optimizada para carga rápida</li>
+                            <li><i class="fas fa-check"></i> Hosting y subdominio GRATIS</li>
+                    </ul>
+                    <a href="https://wa.me/525620042412?text=Hola%2C%20me%20interesa%20App%20Web%20Android." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Servicio</a>
                 </div>
 
                 <!-- Seguridad Web Básica -->
-                <div class="service-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h2 class="card-title">Seguridad Web Básica</h2>
-                        <div class="card-price">💰 Inversión: $2,800 – $3,800 MXN</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-description">Diagnóstico completo para proteger tu sitio web y evitar vulnerabilidades.</p>
-                        <ul class="benefits-list">
-                            <li><i class="fas fa-check-circle"></i> Análisis de vulnerabilidades del sitio o app</li>
-                            <li><i class="fas fa-check-circle"></i> Reporte con recomendaciones de seguridad</li>
-                            <li><i class="fas fa-check-circle"></i> Configuraciones básicas para mayor protección</li>
-                        </ul>
-                    </div>
+                <div class="pricing-card">
+                    <i class="fas fa-shield-alt pricing-icon default"></i>
+                    <h3 class="pricing-title">Seguridad Web Básica</h3>
+                    <div class="pricing-price">$2,800 <span> – $3,800 MXN</span></div>
+                    <p class="pricing-description">Diagnóstico completo para proteger tu sitio web y evitar vulnerabilidades.</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Análisis de vulnerabilidades del sitio o app</li>
+                            <li><i class="fas fa-check"></i> Reporte con recomendaciones de seguridad</li>
+                            <li><i class="fas fa-check"></i> Configuraciones básicas para mayor protección</li>
+                    </ul>
+                    <a href="https://wa.me/525620042412?text=Hola%2C%20me%20interesa%20Seguridad%20Web%20Básica." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Servicio</a>
                 </div>
 
                 <!-- Hosting y Mantenimiento -->
-                <div class="service-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-server"></i>
-                        </div>
-                        <h2 class="card-title">Hosting y Mantenimiento</h2>
-                        <div class="card-price">💰 Inversión: $1,200 – $2,000 MXN</div>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-description">Servicio para asegurar que tu sitio funcione siempre rápido, seguro y actualizado.</p>
-                        <ul class="benefits-list">
-                            <li><i class="fas fa-check-circle"></i> Configuración, hosting, dominio y optimización</li>
-                            <li><i class="fas fa-check-circle"></i> Mantenimiento y rendimiento continuo</li>
-                            <li><i class="fas fa-check-circle"></i> Respaldo de datos y actualizaciones</li>
-                        </ul>
-                    </div>
+                <div class="pricing-card">
+                    <i class="fas fa-server pricing-icon default"></i>
+                    <h3 class="pricing-title">Hosting y Mantenimiento</h3>
+                    <div class="pricing-price">$1,200 <span> – $2,000 MXN</span></div>
+                    <p class="pricing-description">Servicio para asegurar que tu sitio funcione siempre rápido, seguro y actualizado.</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Configuración, hosting, dominio y optimización</li>
+                            <li><i class="fas fa-check"></i> Mantenimiento y rendimiento continuo</li>
+                            <li><i class="fas fa-check"></i> Respaldo de datos y actualizaciones</li>
+                    </ul>
+                    <a href="https://wa.me/525620042412?text=Hola%2C%20me%20interesa%20Hosting%20y%20Mantenimiento." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Servicio</a>
                 </div>
             </div>
 
@@ -778,16 +759,20 @@
             <section class="recommended-packages">
                 <div class="container">
                     <h2 class="section-title"><i class="fas fa-lightbulb"></i> Paquetes Recomendados</h2>
-                    <div class="packages-grid">
-                        <div class="package-card">
-                            <h3>Web + Chatbot Básico</h3>
-                            <p class="package-price">$3,000 – $3,800 MXN</p>
-                            <p class="package-description">La combinación perfecta para empezar a interactuar con tus clientes desde el primer día.</p>
+                    <div class="pricing-cards">
+                        <div class="pricing-card">
+                            <i class="fas fa-crown pricing-icon default"></i>
+                            <h3 class="pricing-title">Web + Chatbot Básico</h3>
+                            <div class="pricing-price">$3,000 <span>– $3,800 MXN</span></div>
+                            <p class="pricing-description" style="flex-grow: 1;">La combinación perfecta para empezar a interactuar con tus clientes desde el primer día.</p>
+                            <a href="https://wa.me/525620042412?text=Hola,%20me%20interesa%20el%20paquete%20recomendado:%20Web%20+%20Chatbot%20Básico." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Paquete</a>
                         </div>
-                        <div class="package-card">
-                            <h3>Web + App Web + Chatbot</h3>
-                            <p class="package-price">$5,300 – $7,500 MXN</p>
-                            <p class="package-description">Presencia digital completa. Llega a tus clientes desde la web y su celular.</p>
+                        <div class="pricing-card">
+                            <i class="fas fa-crown pricing-icon default"></i>
+                            <h3 class="pricing-title">Web + App Web + Chatbot</h3>
+                            <div class="pricing-price">$5,300 <span>– $7,500 MXN</span></div>
+                            <p class="pricing-description" style="flex-grow: 1;">Presencia digital completa. Llega a tus clientes desde la web y su celular.</p>
+                            <a href="https://wa.me/525620042412?text=Hola,%20me%20interesa%20el%20paquete%20recomendado:%20Web%20+%20App%20Web%20+%20Chatbot." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Paquete</a>
                         </div>
                     </div>
                     <p class="package-note"><i class="fas fa-star"></i> Todos incluyen hosting y dominio gratis.</p>
