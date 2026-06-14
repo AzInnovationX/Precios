@@ -3,820 +3,1861 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Precios - Tu Az InnovationX</title>
+    <title>Precios - Az InnovationX (Futuristic 3D)</title>
+    
+    <!-- Meta tags de SEO -->
+    <meta name="description" content="Tarifas y planes oficiales de Az InnovationX. Páginas web profesionales, chatbots con IA y seguridad digital para tu negocio.">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Iconos y Fuentes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-color: #0f0f0f;
-            --surface-color: #1a1a1a;
-            --card-bg-color: #1f1f1f;
-            --primary-text-color: #e0e0e0;
-            --secondary-text-color: #a0a0a0;
-            --accent-color: #bb86fc;
-            --accent-gradient: linear-gradient(135deg, #bb86fc, #03dac6);
-            --card-border-color: #333333;
-            --shadow-color: rgba(0, 0, 0, 0.5);
-            --hover-glow: 0 0 25px rgba(187, 134, 252, 0.5);
+            --bg-color: #05050a;
+            --surface-color: #0b0c16;
+            --card-bg-color: rgba(13, 14, 28, 0.4);
+            --primary-text-color: #f1f5f9;
+            --secondary-text-color: #94a3b8;
+            --accent-purple: #6366f1;
+            --accent-cyan: #06b6d4;
+            --accent-gradient: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            --border-color: rgba(255, 255, 255, 0.07);
+            --border-color-active: rgba(6, 182, 212, 0.5);
+            --hover-glow: 0 0 30px rgba(6, 182, 212, 0.25);
+            --neon-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
         }
 
+        /* Reset y Base */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
+            font-family: 'Outfit', sans-serif;
             color: var(--primary-text-color);
             background-color: var(--bg-color);
             overflow-x: hidden;
+            position: relative;
         }
 
+        /* 3D Background Canvas & Grid Overlay */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .bg-grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .ambient-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--accent-purple), var(--accent-cyan));
+            border-radius: 4px;
+        }
+
+        /* Contenedor */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
         }
 
-        header {
-            background-color: var(--surface-color);
+        /* Header / Navbar */
+        header.nav-header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: rgba(5, 5, 10, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo i {
+            color: var(--accent-cyan);
+            -webkit-text-fill-color: initial;
+            filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.6));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+        }
+
+        .nav-cta {
+            background: transparent;
+            color: var(--primary-text-color);
+            border: 1px solid var(--accent-purple);
+            padding: 10px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--neon-shadow);
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-purple);
             color: white;
-            padding: 80px 0;
-            text-align: center;
-            border-bottom: 1px solid var(--card-border-color);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+            transform: translateY(-2px);
         }
 
-        h1 {
-            font-size: 3.5rem;
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 60px 0;
+            text-align: center;
+        }
+
+        .cyber-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: var(--accent-purple);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 10px rgba(99, 102, 241, 0.2);
+            animation: pulse-glow 2s infinite alternate;
+        }
+
+        .cyber-badge span.blink {
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-cyan);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px var(--accent-cyan);
+            animation: blinker 1s linear infinite;
+        }
+
+        h1.hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
             font-weight: 700;
             margin-bottom: 20px;
+            letter-spacing: -1px;
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: fadeInDown 0.8s ease;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            font-weight: 300;
-            max-width: 800px;
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--secondary-text-color);
+            max-width: 750px;
             margin: 0 auto;
-            color: var(--secondary-text-color);
-            animation: fadeInUp 0.8s ease;
-        }
-
-        main {
-            padding: 80px 0;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .service-card {
-            background-color: var(--card-bg-color);
-            border: 1px solid var(--card-border-color);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--hover-glow);
-            border-color: var(--accent-color);
-        }
-
-        .card-header {
-            padding: 30px;
-            text-align: center;
-            border-bottom: 1px solid var(--card-border-color);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .card-title {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: var(--primary-text-color);
-            margin-bottom: 10px;
-        }
-
-        .card-price {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--accent-color);
-        }
-
-        .card-body {
-            padding: 30px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-description {
-            margin-bottom: 25px;
-            color: var(--secondary-text-color);
             font-weight: 300;
+            line-height: 1.8;
         }
 
-        .benefits-list {
-            list-style: none;
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-
-        .benefits-list li {
-            margin-bottom: 12px;
+        /* Filters Section */
+        .controls-section {
+            margin: 50px 0 30px 0;
             display: flex;
-            align-items: flex-start;
-            color: var(--primary-text-color);
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            background: rgba(11, 12, 22, 0.4);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(8px);
+            padding: 15px 30px;
+            border-radius: 20px;
         }
 
-        .benefits-list i {
-            color: var(--accent-color);
-            margin-right: 12px;
-            margin-top: 3px;
-            font-size: 0.9rem;
-        }
-
-        /* NUEVA SECCIÓN DE PAQUETES */
-        .recommended-packages {
-            margin-top: 80px;
-            padding: 60px 0;
-            text-align: center;
-            border-top: 1px solid var(--card-border-color);
-        }
-
-        .recommended-packages .section-title {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--primary-text-color);
-        }
-        
-        .recommended-packages .section-title i {
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-right: 10px;
-        }
-
-        .packages-grid {
+        .tabs-menu {
             display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
-        .package-card {
-            background: linear-gradient(145deg, var(--card-bg-color), var(--surface-color));
-            border: 1px solid var(--card-border-color);
-            border-radius: 16px;
-            padding: 30px 40px;
-            max-width: 400px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        .tab-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--secondary-text-color);
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary-text-color);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-btn.active {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
+            text-shadow: 0 0 8px rgba(6, 182, 212, 0.3);
+        }
+
+        /* Divisas Toggle */
+        .currency-switch {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.03);
+            padding: 6px 14px;
+            border-radius: 100px;
+            border: 1px solid var(--border-color);
+        }
+
+        .currency-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--secondary-text-color);
+            transition: color 0.3s;
+        }
+
+        .currency-label.active {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 8px rgba(6, 182, 212, 0.4);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: .4s;
+            border-radius: 34px;
+            border: 1px solid var(--border-color);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 3px;
+            bottom: 3px;
+            background-color: var(--accent-cyan);
+            transition: .4s;
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        input:checked + .slider {
+            background-color: rgba(99, 102, 241, 0.2);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+            background-color: var(--accent-purple);
+            box-shadow: 0 0 8px var(--accent-purple);
+        }
+
+        /* 3D Pricing Grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            perspective: 1000px; /* Habilita el entorno 3D */
+            margin-top: 30px;
+            min-height: 400px;
+        }
+
+        .pricing-card-container {
+            display: block;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform-origin: center;
+        }
+
+        /* 3D Card Core */
+        .pricing-card {
+            background: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(16px) saturate(140%);
+            -webkit-backdrop-filter: blur(16px) saturate(140%);
+            border-radius: 24px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
             position: relative;
             overflow: hidden;
+            transform-style: preserve-3d;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        .package-card::before {
+
+        /* 3D Parallax Layers inside Card */
+        .card-depth-1 {
+            transform: translateZ(20px); /* Hace flotar el texto/íconos en 3D */
+        }
+        .card-depth-2 {
+            transform: translateZ(40px); /* Mayor profundidad 3D */
+        }
+        .card-depth-3 {
+            transform: translateZ(55px);
+        }
+
+        .pricing-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
+            background: transparent;
+            transition: background 0.3s ease;
+        }
+
+        .pricing-card.featured::before {
             background: var(--accent-gradient);
         }
 
-        .package-card:hover {
-            transform: translateY(-8px);
+        .pricing-card:hover {
+            border-color: var(--border-color-active);
             box-shadow: var(--hover-glow);
-            border-color: var(--accent-color);
         }
 
-        .package-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 10px;
+        .pricing-card.featured {
+            background: rgba(18, 16, 38, 0.55);
+            border: 2px solid var(--accent-purple);
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.15);
         }
 
-        .package-price {
-            font-size: 1.8rem;
+        .pricing-card.featured:hover {
+            box-shadow: 0 15px 50px rgba(99, 102, 241, 0.35);
+            border-color: var(--accent-cyan);
+        }
+
+        /* Glare effect overlay */
+        .glare {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            border-radius: 24px;
+            transition: background 0.1s;
+        }
+
+        /* Card Elements */
+        .pricing-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-gradient);
+            color: #05050a;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
             font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.3);
         }
 
-        .package-description {
-            color: var(--secondary-text-color);
-            font-weight: 300;
-        }
-
-        .package-note {
-            margin-top: 40px;
-            font-size: 1rem;
-            color: var(--secondary-text-color);
-        }
-        
-        .package-note i {
-            color: var(--accent-color);
-            margin-right: 5px;
-        }
-
-        /* NUEVA SECCIÓN CHATBOTS */
-        .chatbots-pricing {
-            margin-top: 80px;
-            padding: 80px 0;
-            background: linear-gradient(180deg, var(--bg-color) 0%, var(--surface-color) 100%);
-            border-top: 1px solid var(--card-border-color);
-            border-bottom: 1px solid var(--card-border-color);
-        }
-
-        .chatbots-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .chatbots-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--primary-text-color);
-        }
-
-        .chatbots-header h2 span {
+        .pricing-icon {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: inline-block;
+            filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
         }
 
-        .chatbots-slogan {
-            font-size: 1.2rem;
-            color: var(--secondary-text-color);
-            max-width: 800px;
-            margin: 0 auto;
-            font-style: italic;
-        }
-
-        .pricing-cards {
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .pricing-card {
-            background-color: var(--card-bg-color);
-            border: 1px solid var(--card-border-color);
-            border-radius: 20px;
-            padding: 40px 30px;
-            width: 350px;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-15px);
-            box-shadow: var(--hover-glow);
-            border-color: var(--accent-color);
-            z-index: 10;
-        }
-
-        .pricing-card.featured {
-            background: linear-gradient(145deg, var(--surface-color), #2a2a2a);
-            border: 2px solid var(--accent-color);
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(187, 134, 252, 0.2);
-            z-index: 5;
-        }
-
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-10px);
-            box-shadow: 0 15px 40px rgba(187, 134, 252, 0.4);
-        }
-
-        .pricing-badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent-gradient);
-            color: var(--bg-color);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            box-shadow: 0 5px 15px rgba(187, 134, 252, 0.4);
-        }
-
-        .pricing-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: var(--primary-text-color);
-        }
-
-        .pricing-icon.default { color: var(--accent-color); }
-        .pricing-icon.basic { color: #4CAF50; }
-        .pricing-icon.standard { color: #2196F3; }
-        .pricing-icon.premium { color: #FF9800; }
+        .pricing-icon.basic { filter: drop-shadow(0 0 8px rgba(76, 175, 80, 0.4)); background: linear-gradient(135deg, #4CAF50, #8BC34A); -webkit-background-clip: text; }
+        .pricing-icon.standard { filter: drop-shadow(0 0 8px rgba(33, 150, 243, 0.4)); background: linear-gradient(135deg, #2196F3, #00BCD4); -webkit-background-clip: text; }
+        .pricing-icon.premium { filter: drop-shadow(0 0 8px rgba(255, 152, 0, 0.4)); background: linear-gradient(135deg, #FF9800, #FFC107); -webkit-background-clip: text; }
 
         .pricing-title {
-            font-size: 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
             font-weight: 600;
             margin-bottom: 15px;
             color: var(--primary-text-color);
         }
 
         .pricing-price {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             color: var(--primary-text-color);
+            transition: transform 0.2s, opacity 0.2s;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
         }
 
         .pricing-price span {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 400;
             color: var(--secondary-text-color);
         }
 
         .pricing-description {
             color: var(--secondary-text-color);
-            margin-bottom: 20px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-weight: 300;
         }
+
         .pricing-features {
             list-style: none;
-            padding: 0;
-            margin: 0 0 30px 0;
-            text-align: left;
+            margin-bottom: 35px;
             flex-grow: 1;
         }
 
         .pricing-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+            color: var(--primary-text-color);
+            margin-bottom: 14px;
             display: flex;
             align-items: flex-start;
-        }
-
-        .pricing-features li:last-child {
-            border-bottom: none;
+            gap: 12px;
+            font-weight: 300;
         }
 
         .pricing-features li i {
-            color: var(--accent-color);
-            margin-right: 15px;
+            color: var(--accent-cyan);
             margin-top: 3px;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            filter: drop-shadow(0 0 3px rgba(6, 182, 212, 0.5));
         }
 
+        /* Botones de acción */
         .pricing-btn {
-            display: inline-block;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
             width: 100%;
-            padding: 15px;
-            border-radius: 50px;
+            padding: 16px;
+            border-radius: 16px;
+            font-family: 'Space Grotesk', sans-serif;
             font-weight: 600;
+            font-size: 0.95rem;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
             margin-top: auto;
         }
 
         .pricing-btn-outline {
-            background: transparent;
-            color: var(--accent-color);
-            border: 2px solid var(--accent-color);
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--primary-text-color);
+            border: 1px solid var(--accent-cyan);
+            box-shadow: inset 0 0 10px rgba(6, 182, 212, 0.05);
         }
 
         .pricing-btn-outline:hover {
-            background: rgba(187, 134, 252, 0.1);
+            background: var(--accent-cyan);
+            color: #05050a;
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.45);
+            transform: translateY(-3px);
         }
 
         .pricing-btn-solid {
             background: var(--accent-gradient);
-            color: var(--bg-color);
+            color: #05050a;
             border: none;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
         }
 
         .pricing-btn-solid:hover {
-            box-shadow: 0 8px 20px rgba(187, 134, 252, 0.4);
-            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(6, 182, 212, 0.6);
+            transform: translateY(-3px) scale(1.02);
         }
 
-        .cta-section {
+        /* Note label for packages */
+        .package-note-banner {
+            margin-top: 60px;
+            background: rgba(11, 12, 22, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
             text-align: center;
+            font-size: 0.95rem;
+            color: var(--secondary-text-color);
+            backdrop-filter: blur(8px);
+        }
+
+        .package-note-banner i {
+            color: var(--accent-cyan);
+            margin-right: 8px;
+            filter: drop-shadow(0 0 5px rgba(6, 182, 212, 0.5));
+        }
+
+        /* FAQ Accordion Section */
+        .faq-section {
+            padding: 100px 0;
+            border-top: 1px solid var(--border-color);
             margin-top: 80px;
-            padding: 60px 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-header h2 span {
             background: var(--accent-gradient);
-            border-radius: 20px;
-            color: var(--bg-color);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .cta-section h2 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-bottom: 10px;
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .cta-section p {
+        .faq-item {
+            background: rgba(11, 12, 22, 0.35);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            padding: 24px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-question h3 {
             font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--primary-text-color);
+            transition: color 0.3s;
+        }
+
+        .faq-item:hover .faq-question h3 {
+            color: var(--accent-cyan);
+        }
+
+        .faq-toggle-icon {
+            font-size: 1.1rem;
+            color: var(--secondary-text-color);
+            transition: transform 0.3s ease, color 0.3s;
+        }
+
+        .faq-item.active {
+            border-color: var(--border-color-active);
+            background: rgba(11, 12, 22, 0.6);
+        }
+
+        .faq-item.active .faq-toggle-icon {
+            transform: rotate(45deg);
+            color: var(--accent-cyan);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .faq-answer p {
+            padding: 0 30px 24px 30px;
+            color: var(--secondary-text-color);
+            line-height: 1.7;
+            font-size: 0.95rem;
             font-weight: 300;
         }
 
-        .cta-button {
-            display: inline-block;
-            background-color: var(--bg-color);
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: rgba(11, 12, 22, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 35px;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .testimonial-card i.quote-icon {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            font-size: 2.2rem;
+            color: rgba(99, 102, 241, 0.1);
+        }
+
+        .stars {
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-text {
+            color: var(--secondary-text-color);
+            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            font-size: 0.95rem;
             color: var(--primary-text-color);
-            padding: 18px 45px;
+        }
+
+        .testimonial-author span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--accent-purple);
+            font-weight: 400;
+            margin-top: 4px;
+        }
+
+        /* CTA Section Upgrade */
+        .cta-wrapper {
+            margin: 80px 0;
+        }
+
+        .cta-card {
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15) 0%, rgba(6, 182, 212, 0.05) 50%, rgba(11, 12, 22, 0.7) 100%);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 30px;
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(6, 182, 212, 0.05);
+            backdrop-filter: blur(12px);
+        }
+
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            top: -50px;
+            left: -50px;
+        }
+
+        .cta-card h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-card p {
+            color: var(--secondary-text-color);
+            font-size: 1.15rem;
+            font-weight: 300;
+            margin-bottom: 35px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn-main {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--accent-gradient);
+            color: #05050a;
+            padding: 20px 45px;
             border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             text-decoration: none;
-            margin-top: 25px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            font-family: 'Space Grotesk', sans-serif;
         }
 
-        .cta-button:hover {
+        .cta-btn-main:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 35px rgba(6, 182, 212, 0.7);
         }
 
-        footer {
-            background-color: var(--surface-color);
+        /* Footer */
+        footer.cyber-footer {
+            background: #030307;
+            border-top: 1px solid var(--border-color);
             color: var(--secondary-text-color);
-            text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid var(--card-border-color);
+            padding: 80px 0 40px 0;
+            font-weight: 300;
         }
 
-        .footer-content {
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.2fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-text-color);
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            line-height: 1.7;
+            font-size: 0.95rem;
+            max-width: 400px;
+        }
+
+        .footer-links-col h4, .footer-contact-col h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-text-color);
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-links-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 30px;
+            height: 2px;
+            background: var(--accent-gradient);
+        }
+
+        .footer-links-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-links-col ul a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .footer-links-col ul a:hover {
+            color: var(--accent-cyan);
+            padding-left: 5px;
+        }
+
+        .footer-contact-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-contact-col ul li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+        }
+
+        .footer-contact-col ul li i {
+            color: var(--accent-cyan);
+            font-size: 1rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
-            margin-bottom: 30px;
+            gap: 20px;
+            font-size: 0.85rem;
         }
 
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-            margin-bottom: 20px;
-            text-align: left;
-            padding: 0 15px;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 15px;
-            color: var(--primary-text-color);
-            font-weight: 600;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-section a {
+        .footer-bottom a {
             color: var(--secondary-text-color);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.3s;
         }
 
-        .footer-section a:hover {
-            color: var(--accent-color);
+        .footer-bottom a:hover {
+            color: var(--accent-cyan);
         }
 
-        .copyright {
-            padding-top: 20px;
-            border-top: 1px solid var(--card-border-color);
-            font-size: 0.9rem;
-            color: var(--secondary-text-color);
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #25d366;
+            opacity: 0.4;
+            z-index: -1;
+            animation: pulse-ring 1.8s infinite;
+        }
+
+        /* Keyframes */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 10px rgba(99, 102, 241, 0.2), inset 0 0 8px rgba(99, 102, 241, 0.1); }
+            100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), inset 0 0 12px rgba(99, 102, 241, 0.2); }
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0.3; }
+        }
+
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            h1.hero-title {
+                font-size: 3rem;
             }
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Media Queries para Responsividad */
         @media (max-width: 768px) {
-            h1 {
+            .nav-links {
+                display: none;
+            }
+            
+            .controls-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .tabs-menu {
+                justify-content: center;
+            }
+
+            .currency-switch {
+                align-self: center;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1.hero-title {
                 font-size: 2.5rem;
             }
 
-            .subtitle {
-                font-size: 1rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .packages-grid {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .package-card {
-                max-width: 100%;
-            }
-
-            .footer-content {
-                flex-direction: column;
-            }
-
-            .footer-section {
-                text-align: center;
-            }
-        }
-
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .cta-card {
+                padding: 50px 20px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Precios</h1>
-            <p class="subtitle">Diseño y funcionalidad que cautivan. Tu presencia digital, hecha obra de arte.</p>
+
+    <!-- 3D Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+    
+    <!-- Cyber Grid Background Pattern -->
+    <div class="bg-grid-overlay"></div>
+    
+    <!-- Ambient Blur Background Blobs -->
+    <div class="ambient-glow" style="top: 10%; left: 5%;"></div>
+    <div class="ambient-glow" style="top: 50%; right: -5%; background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 70%);"></div>
+    <div class="ambient-glow" style="bottom: 10%; left: 20%; background: radial-gradient(circle, rgba(99, 102, 241, 0.07) 0%, transparent 70%);"></div>
+
+    <!-- Navigation Header -->
+    <header class="nav-header">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-cubes"></i> Az InnovationX
+            </a>
+            <ul class="nav-links">
+                <li><a href="#precios">Precios</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            <a href="https://wa.me/525653915739?text=Hola%2C%20estoy%20interesado%20en%20solicitar%20una%20p%C3%A1gina%20web.%20Vi%20sus%20precios%20en%20el%20sitio%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n." class="nav-cta" target="_blank">
+                Contratar ahora
+            </a>
         </div>
     </header>
 
-    <main>
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
-            <div class="pricing-cards">
-                <!-- Página Web One Page Profesional -->
-                <div class="pricing-card">
-                    <i class="fas fa-globe pricing-icon default"></i>
-                    <h3 class="pricing-title">Página Web One Page Profesional</h3>
-                    <div class="pricing-price">$2,000 <span> – $3,000 MXN</span></div>
-                    <p class="pricing-description">Ideal para emprendedores, servicios personales o marcas que buscan presencia digital moderna, estratégica y diseñada para convertir con un mensaje claro e impactante.</p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Diseño moderno, responsivo y personalizado</li>
-                            <li><i class="fas fa-check"></i> Secciones estratégicas para captar clientes</li>
-                            <li><i class="fas fa-check"></i> Integración profesional con redes sociales</li>
-                            <li><i class="fas fa-check"></i> Formulario de contacto conectado a correo</li>
-                            <li><i class="fas fa-check"></i> Optimización de velocidad y rendimiento en móviles</li>
-                            <li><i class="fas fa-check"></i> Hosting y subdominio GRATIS</li>
-                            <li><i class="fas fa-check"></i> Despliegue, configuración y soporte inicial</li>
-                    </ul>
-                    <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20Página%20Web%20One%20Page%20Profesional." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Servicio</a>
+            <div class="cyber-badge">
+                <span class="blink"></span> TARIFAS OFICIALES 2026 // v2.0
+            </div>
+            <h1 class="hero-title">Soluciones del Futuro</h1>
+            <p class="hero-subtitle">Diseño y desarrollo de alta gama. Creamos interfaces tridimensionales interactivas, chatbots inteligentes y sistemas web preparados para escalar tu negocio.</p>
+        </div>
+    </section>
+
+    <!-- Main Pricing Area -->
+    <main id="precios">
+        <div class="container">
+            
+            <!-- Controls (Tabs and Currency Toggle) -->
+            <div class="controls-section">
+                <!-- Pestañas de Filtrado -->
+                <div class="tabs-menu" role="tablist">
+                    <button class="tab-btn active" data-tab="all" role="tab" aria-selected="true">Todos</button>
+                    <button class="tab-btn" data-tab="web" role="tab" aria-selected="false">Sitios Web</button>
+                    <button class="tab-btn" data-tab="chatbot" role="tab" aria-selected="false">Chatbots IA</button>
+                    <button class="tab-btn" data-tab="security" role="tab" aria-selected="false">Seguridad & Hosting</button>
+                    <button class="tab-btn" data-tab="package" role="tab" aria-selected="false">Paquetes</button>
                 </div>
 
-                <!-- Página Web Empresarial Premium -->
-                <div class="pricing-card">
-                    <i class="fas fa-building pricing-icon default"></i>
-                    <h3 class="pricing-title">Página Web Empresarial Premium</h3>
-                    <div class="pricing-price">$2,500 <span> – $3,500 MXN</span></div>
-                    <p class="pricing-description">Sitio web profesional y corporativo con mayor estructura, credibilidad y herramientas para negocios que desean posicionarse, escalar y vender más.</p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Estructura completa con múltiples secciones</li>
-                            <li><i class="fas fa-check"></i> Galería de imágenes optimizada</li>
-                            <li><i class="fas fa-check"></i> SEO básico para aparecer en Google</li>
-                            <li><i class="fas fa-check"></i> Copywriting persuasivo</li>
-                            <li><i class="fas fa-check"></i> Diseño responsive con estilo empresarial</li>
-                            <li><i class="fas fa-check"></i> Sección opcional: clientes, valores, certificaciones o equipo</li>
-                            <li><i class="fas fa-check"></i> Hosting y subdominio GRATIS</li>
-                            <li><i class="fas fa-check"></i> Certificado SSL + configuración profesional de seguridad</li>
-                            <li><i class="fas fa-check"></i> 1 ronda de ajustes de diseño</li>
-                    </ul>
-                    <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20Página%20Web%20Empresarial%20Premium." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Servicio</a>
-                </div>
-
-                <!-- Tienda Online Básica -->
-                <div class="pricing-card">
-                    <i class="fas fa-shopping-cart pricing-icon default"></i>
-                    <h3 class="pricing-title">Tienda Online Básica</h3>
-                    <div class="pricing-price">$2,500 <span> – $3,000 MXN</span></div>
-                    <p class="pricing-description">Catálogo digital para comenzar a vender en línea de forma rápida, fácil y con presencia profesional.</p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Catálogo de productos con diseño profesional</li>
-                            <li><i class="fas fa-check"></i> Carrito sencillo con pagos integrados</li>
-                            <li><i class="fas fa-check"></i> Integración con WhatsApp para pedidos</li>
-                            <li><i class="fas fa-check"></i> Diseño responsive optimizado para compras desde móvil</li>
-                            <li><i class="fas fa-check"></i> Hosting y subdominio GRATIS</li>
-                    </ul>
-                    <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20Tienda%20Online%20Básica." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Servicio</a>
-                </div>
-
-                <!-- App Web PWA -->
-                <div class="pricing-card">
-                    <i class="fas fa-mobile-alt pricing-icon default"></i>
-                    <h3 class="pricing-title">App Web PWA</h3>
-                    <div class="pricing-price">$2,800 <span> – $3,700 MXN</span></div>
-                    <p class="pricing-description">Aplicación web instalable tipo app para Android con acceso directo desde el celular.</p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> App web instalable (PWA)</li>
-                            <li><i class="fas fa-check"></i> Menú, galería, redes y contacto</li>
-                            <li><i class="fas fa-check"></i> Optimizada para carga rápida</li>
-                            <li><i class="fas fa-check"></i> Hosting y subdominio GRATIS</li>
-                    </ul>
-                    <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20App%20Web%20PWA." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Servicio</a>
-                </div>
-
-                <!-- Seguridad Web Básica -->
-                <div class="pricing-card">
-                    <i class="fas fa-shield-alt pricing-icon default"></i>
-                    <h3 class="pricing-title">Seguridad Web Básica</h3>
-                    <div class="pricing-price">$2,800 <span> – $3,800 MXN</span></div>
-                    <p class="pricing-description">Diagnóstico completo para proteger tu sitio web y evitar vulnerabilidades.</p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Análisis de vulnerabilidades del sitio o app</li>
-                            <li><i class="fas fa-check"></i> Reporte con recomendaciones de seguridad</li>
-                            <li><i class="fas fa-check"></i> Configuraciones básicas para mayor protección</li>
-                    </ul>
-                    <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20Seguridad%20Web%20Básica." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Servicio</a>
-                </div>
-
-                <!-- Hosting y Mantenimiento -->
-                <div class="pricing-card">
-                    <i class="fas fa-server pricing-icon default"></i>
-                    <h3 class="pricing-title">Hosting y Mantenimiento</h3>
-                    <div class="pricing-price">$1,200 <span> – $2,000 MXN</span></div>
-                    <p class="pricing-description">Servicio para asegurar que tu sitio funcione siempre rápido, seguro y actualizado.</p>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Configuración, hosting, dominio y optimización</li>
-                            <li><i class="fas fa-check"></i> Mantenimiento y rendimiento continuo</li>
-                            <li><i class="fas fa-check"></i> Respaldo de datos y actualizaciones</li>
-                    </ul>
-                    <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20Hosting%20y%20Mantenimiento." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Servicio</a>
+                <!-- Selector de Divisas (Switch) -->
+                <div class="currency-switch">
+                    <span id="label-mxn" class="currency-label active">MXN</span>
+                    <label class="switch" for="currency-toggle">
+                        <input type="checkbox" id="currency-toggle" aria-label="Cambiar divisa a USD">
+                        <span class="slider"></span>
+                    </label>
+                    <span id="label-usd" class="currency-label">USD</span>
                 </div>
             </div>
 
-            <!-- NUEVA SECCIÓN DE PRECIOS DE CHATBOTS -->
-            <section class="chatbots-pricing">
-                <div class="container">
-                    <div class="chatbots-header">
-                        <h2>Planes Oficiales de <span>Chatbots</span></h2>
-                        <p class="chatbots-slogan">"Automatiza tu negocio, responde al instante y convierte visitantes en clientes con tecnología inteligente."</p>
+            <!-- Pricing Grid -->
+            <div class="pricing-grid">
+                
+                <!-- 1. Página Web One Page Profesional -->
+                <div class="pricing-card-container" data-category="web">
+                    <div class="pricing-card">
+                        <div class="glare"></div>
+                        <div class="card-depth-1">
+                            <i class="fas fa-globe pricing-icon standard"></i>
+                            <h3 class="pricing-title">One Page Profesional</h3>
+                        </div>
+                        <div class="card-depth-2">
+                            <div class="pricing-price" data-mxn="$3,500<span>MXN</span>" data-usd="$210<span>USD</span>">$3,500<span>MXN</span></div>
+                            <p class="pricing-description">Ideal para emprendedores o marcas que buscan presencia digital moderna, estratégica y diseñada para convertir visitas en clientes.</p>
+                        </div>
+                        <div class="card-depth-1" style="flex-grow: 1;">
+                            <ul class="pricing-features">
+                                <li><i class="far fa-clock"></i> <strong>Entrega:</strong> 3 - 5 días hábiles</li>
+                                <li><i class="fas fa-redo"></i> <strong>Revisiones:</strong> 2 rondas de ajustes</li>
+                                <li><i class="fas fa-code"></i> <strong>Stack:</strong> HTML5, CSS3, JS + Animaciones</li>
+                                <li><i class="fas fa-bullhorn"></i> <strong>Marketing:</strong> Google Analytics y Pixel</li>
+                                <li><i class="fas fa-user-shield"></i> <strong>Soporte:</strong> 30 días posventa gratis</li>
+                                <li><i class="fas fa-check"></i> Diseño premium adaptado a tu marca</li>
+                                <li><i class="fas fa-check"></i> Formulario directo conectado a correo</li>
+                                <li><i class="fas fa-check"></i> Correo corporativo profesional</li>
+                                <li><i class="fas fa-check"></i> Dominio .com o .mx (1 año) o Subdominio gratis</li>
+                            </ul>
+                        </div>
+                        <div class="card-depth-3">
+                            <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20Página%20Web%20One%20Page%20Profesional." class="pricing-btn pricing-btn-outline" target="_blank">
+                                Solicitar Servicio <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="pricing-cards">
-                        <!-- Plan Básico -->
-                        <div class="pricing-card">
+                <!-- 2. Página Web Empresarial Premium -->
+                <div class="pricing-card-container" data-category="web">
+                    <div class="pricing-card">
+                        <div class="glare"></div>
+                        <div class="card-depth-1">
+                            <i class="fas fa-building pricing-icon premium"></i>
+                            <h3 class="pricing-title">Web Empresarial Premium</h3>
+                        </div>
+                        <div class="card-depth-2">
+                            <div class="pricing-price" data-mxn="$6,500 – $7,000<span>MXN</span>" data-usd="$390 – $420<span>USD</span>">$6,500 – $7,000<span>MXN</span></div>
+                            <p class="pricing-description">Sitio web estructurado y corporativo para negocios que desean posicionarse, escalar y proyectar máxima seriedad y credibilidad.</p>
+                        </div>
+                        <div class="card-depth-1" style="flex-grow: 1;">
+                            <ul class="pricing-features">
+                                <li><i class="far fa-clock"></i> <strong>Entrega:</strong> 7 - 12 días hábiles</li>
+                                <li><i class="fas fa-redo"></i> <strong>Revisiones:</strong> 3 rondas de ajustes</li>
+                                <li><i class="fas fa-code"></i> <strong>Stack:</strong> HTML5, CSS3, JS + SEO Semántico</li>
+                                <li><i class="fas fa-bullhorn"></i> <strong>Marketing:</strong> Analytics, Pixel y Google Maps</li>
+                                <li><i class="fas fa-user-shield"></i> <strong>Soporte:</strong> 30 días posventa gratis</li>
+                                <li><i class="fas fa-check"></i> Estructura completa (Múltiples páginas)</li>
+                                <li><i class="fas fa-check"></i> Certificado SSL + seguridad perimetral</li>
+                                <li><i class="fas fa-check"></i> Correo corporativo profesional</li>
+                                <li><i class="fas fa-check"></i> Dominio .com o .mx (1 año) o Subdominio gratis</li>
+                            </ul>
+                        </div>
+                        <div class="card-depth-3">
+                            <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20Página%20Web%20Empresarial%20Premium." class="pricing-btn pricing-btn-outline" target="_blank">
+                                Solicitar Servicio <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Tienda Online Básica -->
+                <div class="pricing-card-container" data-category="web">
+                    <div class="pricing-card">
+                        <div class="glare"></div>
+                        <div class="card-depth-1">
+                            <i class="fas fa-shopping-cart pricing-icon standard"></i>
+                            <h3 class="pricing-title">Tienda Online Básica</h3>
+                        </div>
+                        <div class="card-depth-2">
+                            <div class="pricing-price" data-mxn="$5,000<span>MXN</span>" data-usd="$300<span>USD</span>">$5,000<span>MXN</span></div>
+                            <p class="pricing-description">Catálogo digital optimizado para comenzar a vender tus productos en línea de manera sencilla y segura.</p>
+                        </div>
+                        <div class="card-depth-1" style="flex-grow: 1;">
+                            <ul class="pricing-features">
+                                <li><i class="far fa-clock"></i> <strong>Entrega:</strong> 8 - 14 días hábiles</li>
+                                <li><i class="fas fa-redo"></i> <strong>Revisiones:</strong> 3 rondas de ajustes</li>
+                                <li><i class="fas fa-code"></i> <strong>Stack:</strong> HTML5, CSS3, JS + WhatsApp Checkout</li>
+                                <li><i class="fas fa-bullhorn"></i> <strong>Marketing:</strong> Conexión Catálogo FB / Instagram</li>
+                                <li><i class="fas fa-user-shield"></i> <strong>Soporte:</strong> 30 días posventa gratis</li>
+                                <li><i class="fas fa-check"></i> Catálogo digital de productos</li>
+                                <li><i class="fas fa-check"></i> Carrito de compras intuitivo</li>
+                                <li><i class="fas fa-check"></i> Dominio .com o .mx (1 año) o Subdominio gratis</li>
+                            </ul>
+                        </div>
+                        <div class="card-depth-3">
+                            <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20Tienda%20Online%20Básica." class="pricing-btn pricing-btn-outline" target="_blank">
+                                Solicitar Servicio <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. App Web PWA -->
+                <div class="pricing-card-container" data-category="web">
+                    <div class="pricing-card">
+                        <div class="glare"></div>
+                        <div class="card-depth-1">
+                            <i class="fas fa-mobile-alt pricing-icon standard"></i>
+                            <h3 class="pricing-title">App Web PWA</h3>
+                        </div>
+                        <div class="card-depth-2">
+                            <div class="pricing-price" data-mxn="$6,700<span>MXN</span>" data-usd="$400<span>USD</span>">$6,700<span>MXN</span></div>
+                            <p class="pricing-description">Aplicación web progresiva e instalable tipo app nativa para smartphones con accesos directos rápidos.</p>
+                        </div>
+                        <div class="card-depth-1" style="flex-grow: 1;">
+                            <ul class="pricing-features">
+                                <li><i class="far fa-clock"></i> <strong>Entrega:</strong> 10 - 15 días hábiles</li>
+                                <li><i class="fas fa-redo"></i> <strong>Revisiones:</strong> 2 rondas de ajustes</li>
+                                <li><i class="fas fa-code"></i> <strong>Stack:</strong> PWA, Service Workers, Offline Cache</li>
+                                <li><i class="fas fa-user-shield"></i> <strong>Soporte:</strong> 30 días posventa gratis</li>
+                                <li><i class="fas fa-check"></i> Menús dinámicos, galerías y botones</li>
+                                <li><i class="fas fa-check"></i> Acceso sin fricciones desde la pantalla principal</li>
+                                <li><i class="fas fa-check"></i> Hosting y subdominio GRATIS</li>
+                            </ul>
+                        </div>
+                        <div class="card-depth-3">
+                            <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20App%20Web%20PWA." class="pricing-btn pricing-btn-outline" target="_blank">
+                                Solicitar Servicio <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Seguridad Web Básica -->
+                <div class="pricing-card-container" data-category="security">
+                    <div class="pricing-card">
+                        <div class="glare"></div>
+                        <div class="card-depth-1">
+                            <i class="fas fa-shield-alt pricing-icon premium"></i>
+                            <h3 class="pricing-title">Seguridad Web Básica</h3>
+                        </div>
+                        <div class="card-depth-2">
+                            <div class="pricing-price" data-mxn="$2,800 – $3,800<span>MXN</span>" data-usd="$170 – $230<span>USD</span>">$2,800 – $3,800<span>MXN</span></div>
+                            <p class="pricing-description">Diagnóstico y protección integral de tu plataforma contra amenazas y brechas de seguridad comunes.</p>
+                        </div>
+                        <div class="card-depth-1" style="flex-grow: 1;">
+                            <ul class="pricing-features">
+                                <li><i class="far fa-clock"></i> <strong>Entrega:</strong> 2 - 4 días hábiles</li>
+                                <li><i class="fas fa-file-pdf"></i> <strong>Entregable:</strong> Reporte técnico PDF + Mitigación</li>
+                                <li><i class="fas fa-code"></i> <strong>Stack:</strong> Hardening SSH, Configuración Firewalls</li>
+                                <li><i class="fas fa-user-shield"></i> <strong>Soporte:</strong> 15 días posventa gratis</li>
+                                <li><i class="fas fa-check"></i> Auditoría completa de vulnerabilidades</li>
+                                <li><i class="fas fa-check"></i> Hardening de servidor y protección de datos</li>
+                            </ul>
+                        </div>
+                        <div class="card-depth-3">
+                            <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20Seguridad%20Web%20Básica." class="pricing-btn pricing-btn-outline" target="_blank">
+                                Solicitar Servicio <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Hosting y Mantenimiento -->
+                <div class="pricing-card-container" data-category="security">
+                    <div class="pricing-card">
+                        <div class="glare"></div>
+                        <div class="card-depth-1">
+                            <i class="fas fa-server pricing-icon standard"></i>
+                            <h3 class="pricing-title">Hosting & Soporte</h3>
+                        </div>
+                        <div class="card-depth-2">
+                            <div class="pricing-price" data-mxn="$1,200 – $2,000<span>MXN</span>" data-usd="$70 – $120<span>USD</span>">$1,200 – $2,000<span>MXN</span></div>
+                            <p class="pricing-description">Mantenimiento continuo para asegurar que tu sitio web sea veloz, estable y permanezca actualizado.</p>
+                        </div>
+                        <div class="card-depth-1" style="flex-grow: 1;">
+                            <ul class="pricing-features">
+                                <li><i class="far fa-clock"></i> <strong>Entrega:</strong> Aprovisionamiento inmediato (&lt; 24h)</li>
+                                <li><i class="fas fa-redo"></i> <strong>Cobro:</strong> Anualidad recurrente</li>
+                                <li><i class="fas fa-server"></i> <strong>Servidor:</strong> Cloud dedicado de alta velocidad</li>
+                                <li><i class="fas fa-user-shield"></i> <strong>Garantía:</strong> Uptime 99.9% + soporte activo 24/7</li>
+                                <li><i class="fas fa-check"></i> Gestión y registro de dominio personalizado</li>
+                                <li><i class="fas fa-check"></i> Respaldos semanales automáticos</li>
+                            </ul>
+                        </div>
+                        <div class="card-depth-3">
+                            <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20Hosting%20y%20Mantenimiento." class="pricing-btn pricing-btn-outline" target="_blank">
+                                Solicitar Servicio <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Chatbot Plan Básico -->
+                <div class="pricing-card-container" data-category="chatbot">
+                    <div class="pricing-card">
+                        <div class="glare"></div>
+                        <div class="card-depth-1">
                             <i class="fas fa-robot pricing-icon basic"></i>
-                            <h3 class="pricing-title">🟢 Plan Básico</h3>
-                            <div class="pricing-price">$700 <span>MXN</span></div>
-                            <ul class="pricing-features">
-                                <li><i class="fas fa-check"></i> Chatbot con botones interactivos</li>
-                                <li><i class="fas fa-check"></i> Respuestas automáticas</li>
-                                <li><i class="fas fa-check"></i> Integración en página web o blog</li>
-                                <li><i class="fas fa-check"></i> Diseño funcional</li>
-                            </ul>
-                            <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20el%20Plan%20Básico%20de%20Chatbot." class="pricing-btn pricing-btn-outline" target="_blank">Elegir Plan</a>
+                            <h3 class="pricing-title">Chatbot Básico</h3>
                         </div>
+                        <div class="card-depth-2">
+                            <div class="pricing-price" data-mxn="$1,200<span>MXN</span>" data-usd="$70<span>USD</span>">$1,200<span>MXN</span></div>
+                            <p class="pricing-description">Automatización básica e inmediata mediante botones para agilizar las preguntas más recurrentes.</p>
+                        </div>
+                        <div class="card-depth-1" style="flex-grow: 1;">
+                            <ul class="pricing-features">
+                                <li><i class="far fa-clock"></i> <strong>Entrega:</strong> 2 - 4 días hábiles</li>
+                                <li><i class="fas fa-redo"></i> <strong>Revisiones:</strong> 2 rondas de ajustes del flujo</li>
+                                <li><i class="fas fa-code"></i> <strong>Stack:</strong> HTML, CSS, JS, Flujo Estático</li>
+                                <li><i class="fas fa-user-shield"></i> <strong>Soporte:</strong> 15 días posventa gratis</li>
+                                <li><i class="fas fa-check"></i> Chatbot guiado por botones interactivos</li>
+                                <li><i class="fas fa-check"></i> Menú estructurado de respuestas rápidas</li>
+                                <li><i class="fas fa-check"></i> Incrustado en tu sitio web, blog o landing</li>
+                            </ul>
+                        </div>
+                        <div class="card-depth-3">
+                            <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20el%20Plan%20Básico%20de%20Chatbot." class="pricing-btn pricing-btn-outline" target="_blank">
+                                Seleccionar Plan <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-                        <!-- Plan Estándar (Recomendado) -->
-                        <div class="pricing-card featured">
-                            <div class="pricing-badge">Recomendado</div>
+                <!-- 8. Chatbot Plan Estándar (Recomendado) -->
+                <div class="pricing-card-container" data-category="chatbot">
+                    <div class="pricing-card featured">
+                        <div class="pricing-badge">Recomendado</div>
+                        <div class="glare"></div>
+                        <div class="card-depth-1">
                             <i class="fas fa-brain pricing-icon standard"></i>
-                            <h3 class="pricing-title">🔵 Plan Estándar</h3>
-                            <div class="pricing-price">$1,200 <span>MXN</span></div>
-                            <ul class="pricing-features">
-                                <li><i class="fas fa-check"></i> Chatbot con Inteligencia Artificial</li>
-                                <li><i class="fas fa-check"></i> Respuestas dinámicas tipo ChatGPT</li>
-                                <li><i class="fas fa-check"></i> Personalización básica</li>
-                                <li><i class="fas fa-check"></i> Mejor diseño y experiencia</li>
-                            </ul>
-                            <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20el%20Plan%20Estándar%20de%20Chatbot." class="pricing-btn pricing-btn-solid" target="_blank">Elegir Plan</a>
+                            <h3 class="pricing-title">Chatbot Estándar (IA)</h3>
                         </div>
+                        <div class="card-depth-2">
+                            <div class="pricing-price" data-mxn="$2,600<span>MXN</span>" data-usd="$150<span>USD</span>">$2,600<span>MXN</span></div>
+                            <p class="pricing-description">Asistente conversacional inteligente que comprende el lenguaje humano y responde de manera fluida.</p>
+                        </div>
+                        <div class="card-depth-1" style="flex-grow: 1;">
+                            <ul class="pricing-features">
+                                <li><i class="far fa-clock"></i> <strong>Entrega:</strong> 4 - 7 días hábiles</li>
+                                <li><i class="fas fa-redo"></i> <strong>Revisiones:</strong> 3 rondas de calibración de IA</li>
+                                <li><i class="fas fa-code"></i> <strong>Stack:</strong> OpenAI API (GPT) + Base de datos</li>
+                                <li><i class="fas fa-user-shield"></i> <strong>Soporte:</strong> 30 días posventa gratis</li>
+                                <li><i class="fas fa-check"></i> Respuestas dinámicas basadas en contexto</li>
+                                <li><i class="fas fa-check"></i> Entrenamiento adaptado a tu negocio</li>
+                                <li><i class="fas fa-check"></i> Diseño avanzado y animaciones sutiles</li>
+                            </ul>
+                        </div>
+                        <div class="card-depth-3">
+                            <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20el%20Plan%20Estándar%20de%20Chatbot." class="pricing-btn pricing-btn-solid" target="_blank">
+                                Seleccionar Plan <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-                        <!-- Plan PRO -->
-                        <div class="pricing-card">
+                <!-- 9. Chatbot Plan PRO -->
+                <div class="pricing-card-container" data-category="chatbot">
+                    <div class="pricing-card">
+                        <div class="glare"></div>
+                        <div class="card-depth-1">
                             <i class="fas fa-rocket pricing-icon premium"></i>
-                            <h3 class="pricing-title">🔥 Plan PRO (Premium)</h3>
-                            <div class="pricing-price">$1,400 <span>MXN</span></div>
+                            <h3 class="pricing-title">Chatbot PRO (Híbrido)</h3>
+                        </div>
+                        <div class="card-depth-2">
+                            <div class="pricing-price" data-mxn="$1,400<span>MXN</span>" data-usd="$85<span>USD</span>">$1,400<span>MXN</span></div>
+                            <p class="pricing-description">La potencia de la Inteligencia Artificial unida a flujos de botones y toma de datos estructurados.</p>
+                        </div>
+                        <div class="card-depth-1" style="flex-grow: 1;">
                             <ul class="pricing-features">
-                                <li><i class="fas fa-check"></i> IA + botones interactivos</li>
-                                <li><i class="fas fa-check"></i> Diseño moderno tipo app</li>
-                                <li><i class="fas fa-check"></i> Integración completa (web, sistemas)</li>
-                                <li><i class="fas fa-check"></i> Animaciones y experiencia premium</li>
-                                <li><i class="fas fa-check"></i> Configuración avanzada personalizada</li>
+                                <li><i class="far fa-clock"></i> <strong>Entrega:</strong> 7 - 12 días hábiles</li>
+                                <li><i class="fas fa-redo"></i> <strong>Revisiones:</strong> 3 rondas de calibración y pruebas API</li>
+                                <li><i class="fas fa-code"></i> <strong>Stack:</strong> GPT-4o API, Webhook (APIs, CRM, Sheets)</li>
+                                <li><i class="fas fa-user-shield"></i> <strong>Soporte:</strong> 30 días posventa gratis</li>
+                                <li><i class="fas fa-check"></i> Captación y guardado automático de leads</li>
+                                <li><i class="fas fa-check"></i> Animación 3D en la interfaz de chat</li>
                             </ul>
-                            <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20el%20Plan%20PRO%20de%20Chatbot." class="pricing-btn pricing-btn-outline" target="_blank">Elegir Plan</a>
+                        </div>
+                        <div class="card-depth-3">
+                            <a href="https://wa.me/525653915739?text=Hola%2C%20me%20interesa%20el%20Plan%20PRO%20de%20Chatbot." class="pricing-btn pricing-btn-outline" target="_blank">
+                                Seleccionar Plan <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- NUEVA SECCIÓN DE PAQUETES RECOMENDADOS -->
-            <section class="recommended-packages">
-                <div class="container">
-                    <h2 class="section-title"><i class="fas fa-lightbulb"></i> Paquetes Recomendados</h2>
-                    <div class="pricing-cards">
-                        <div class="pricing-card">
-                            <i class="fas fa-crown pricing-icon default"></i>
+                <!-- 10. Web + Chatbot Básico -->
+                <div class="pricing-card-container" data-category="package">
+                    <div class="pricing-card">
+                        <div class="glare"></div>
+                        <div class="card-depth-1">
+                            <i class="fas fa-crown pricing-icon standard"></i>
                             <h3 class="pricing-title">Web + Chatbot Básico</h3>
-                            <div class="pricing-price">$3,000 <span>– $3,800 MXN</span></div>
-                            <p class="pricing-description" style="flex-grow: 1;">La combinación perfecta para empezar a interactuar con tus clientes desde el primer día.</p>
-                            <a href="https://wa.me/525653915739?text=Hola,%20me%20interesa%20el%20paquete%20recomendado:%20Web%20+%20Chatbot%20Básico." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Paquete</a>
                         </div>
-                        <div class="pricing-card">
-                            <i class="fas fa-crown pricing-icon default"></i>
-                            <h3 class="pricing-title">Web + App Web + Chatbot</h3>
-                            <div class="pricing-price">$5,300 <span>– $7,500 MXN</span></div>
-                            <p class="pricing-description" style="flex-grow: 1;">Presencia digital completa. Llega a tus clientes desde la web y su celular.</p>
-                            <a href="https://wa.me/525653915739?text=Hola,%20me%20interesa%20el%20paquete%20recomendado:%20Web%20+%20App%20Web%20+%20Chatbot." class="pricing-btn pricing-btn-outline" target="_blank">Solicitar Paquete</a>
+                        <div class="card-depth-2">
+                            <div class="pricing-price" data-mxn="$3,000 – $3,800<span>MXN</span>" data-usd="$180 – $230<span>USD</span>">$3,000 – $3,800<span>MXN</span></div>
+                            <p class="pricing-description">La combinación estratégica para posicionar tu sitio y responder solicitudes al instante desde el primer segundo.</p>
+                        </div>
+                        <div class="card-depth-1" style="flex-grow: 1;">
+                            <ul class="pricing-features">
+                                <li><i class="far fa-clock"></i> <strong>Entrega:</strong> 5 - 8 días hábiles</li>
+                                <li><i class="fas fa-redo"></i> <strong>Revisiones:</strong> 3 rondas de ajustes distribuidas</li>
+                                <li><i class="fas fa-code"></i> <strong>Stack:</strong> HTML5, CSS3, JS + Flujo Estático</li>
+                                <li><i class="fas fa-user-shield"></i> <strong>Soporte:</strong> 30 días posventa gratis</li>
+                                <li><i class="fas fa-check"></i> Página Web One Page adaptada a tus necesidades</li>
+                                <li><i class="fas fa-check"></i> Chatbot básico de respuestas rápidas pre-instalado</li>
+                                <li><i class="fas fa-check"></i> Hosting y subdominio incluidos</li>
+                            </ul>
+                        </div>
+                        <div class="card-depth-3">
+                            <a href="https://wa.me/525653915739?text=Hola,%20me%20interesa%20el%20paquete%20recomendado:%20Web%20+%20Chatbot%20Básico." class="pricing-btn pricing-btn-outline" target="_blank">
+                                Contratar Paquete <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
-                    <p class="package-note"><i class="fas fa-star"></i> Todos incluyen hosting y dominio gratis.</p>
                 </div>
-            </section>
 
-            <div class="cta-section">
-                <h2>¿Listo para crear algo extraordinario?</h2>
-                <p>Hablemos de tu proyecto y demos vida a tu visión.</p>
-                <a href="https://wa.me/525653915739?text=Hola%2C%20estoy%20interesado%20en%20solicitar%20una%20p%C3%A1gina%20web.%20Vi%20sus%20precios%20en%20el%20sitio%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n." class="cta-button" target="_blank">Solicitar mi página</a>
+                <!-- 11. Web + App Web + Chatbot -->
+                <div class="pricing-card-container" data-category="package">
+                    <div class="pricing-card">
+                        <div class="glare"></div>
+                        <div class="card-depth-1">
+                            <i class="fas fa-crown pricing-icon premium"></i>
+                            <h3 class="pricing-title">Web + App PWA + Chatbot</h3>
+                        </div>
+                        <div class="card-depth-2">
+                            <div class="pricing-price" data-mxn="$5,300 – $7,500<span>MXN</span>" data-usd="$320 – $450<span>USD</span>">$5,300 – $7,500<span>MXN</span></div>
+                            <p class="pricing-description">Nuestra solución de omnicanalidad digital definitiva. Llega a tus usuarios desde navegadores, móviles y automatizaciones de IA.</p>
+                        </div>
+                        <div class="card-depth-1" style="flex-grow: 1;">
+                            <ul class="pricing-features">
+                                <li><i class="far fa-clock"></i> <strong>Entrega:</strong> 15 - 25 días hábiles</li>
+                                <li><i class="fas fa-redo"></i> <strong>Revisiones:</strong> 4 rondas de revisión completas</li>
+                                <li><i class="fas fa-code"></i> <strong>Stack:</strong> Web Corporativa, PWA, Chatbot IA</li>
+                                <li><i class="fas fa-user-shield"></i> <strong>Soporte:</strong> 60 días posventa premium gratis</li>
+                                <li><i class="fas fa-check"></i> Versión App Instalable en móviles (PWA)</li>
+                                <li><i class="fas fa-check"></i> Chatbot conversacional inteligente (IA) integrado</li>
+                                <li><i class="fas fa-check"></i> Hosting Premium dedicado por un año</li>
+                            </ul>
+                        </div>
+                        <div class="card-depth-3">
+                            <a href="https://wa.me/525653915739?text=Hola,%20me%20interesa%20el%20paquete%20recomendado:%20Web%20+%20App%20Web%20+%20Chatbot." class="pricing-btn pricing-btn-outline" target="_blank">
+                                Contratar Paquete <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
+            <!-- Banner Informativo de Paquetes -->
+            <div class="package-note-banner">
+                <p><i class="fas fa-star-of-life"></i> Todos nuestros planes y paquetes de desarrollo digital incluyen configuración de servidores, hosting y dominio gratis de forma inicial.</p>
+            </div>
+
         </div>
     </main>
 
-    <footer>
+    <!-- Testimonials Section -->
+    <section id="testimonios" class="testimonials">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Sobre Nosotros</h3>
-                    <p>Somos expertos en soluciones digitales para emprendedores. Creamos sitios web profesionales que ayudan a tu negocio a crecer.</p>
+            <div class="section-header">
+                <h2>Lo Que Dicen <span>Nuestros Clientes</span></h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"El equipo diseñó nuestro sitio web corporativo de forma impecable. El rendimiento en móviles es asombroso y las ventas se han disparado."</p>
+                    <div class="testimonial-author">
+                        Santi A.
+                        <span>Emprendedor de Comercio Electrónico</span>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h3>Enlaces Rápidos</h3>
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"El chatbot con inteligencia artificial responde en segundos todas las preguntas de soporte. Nos ha ahorrado horas diarias en atención al cliente."</p>
+                    <div class="testimonial-author">
+                        Valeria M.
+                        <span>CEO de e-Commerce Global</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Velocidad de carga de nivel premium, diseño futurista y seguridad a toda prueba. Son expertos en lo que hacen."</p>
+                    <div class="testimonial-author">
+                        Roberto G.
+                        <span>Director de Tecnología, Az Tech</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Preguntas <span>Frecuentes</span></h2>
+            </div>
+            
+            <div class="faq-grid">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Qué incluye el hosting y dominio gratis?</h3>
+                        <i class="fas fa-plus faq-toggle-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Incluye el aprovisionamiento de un servidor de alta velocidad optimizado en la nube y un subdominio gratuito gestionado directamente por Az InnovationX, asegurando una disponibilidad de sitio óptima sin cargos ocultos.</p>
+                    </div>
+                </div>
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Cómo funcionan los Chatbots entrenados con IA?</h3>
+                        <i class="fas fa-plus faq-toggle-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Conectamos modelos de procesamiento del lenguaje natural (tipo GPT) alimentados con la base de conocimientos estructurada de tu empresa. Esto permite que el chatbot atienda dudas complejas y recopile leads de forma natural.</p>
+                    </div>
+                </div>
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Ofrecen soporte después de la entrega?</h3>
+                        <i class="fas fa-plus faq-toggle-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí. Todos nuestros planes de desarrollo cuentan con soporte técnico inicial garantizado para resolver cualquier anomalía durante el despliegue. Para soporte a largo plazo y monitorización, disponemos de nuestro plan continuo de Hosting & Soporte.</p>
+                    </div>
+                </div>
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>¿Puedo escalar mi plan web a futuro?</h3>
+                        <i class="fas fa-plus faq-toggle-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Totalmente. Todo nuestro software y desarrollo de sitios se realiza de manera modular. Puedes arrancar con un plan de One Page y posteriormente agregar un Catálogo, Pasarelas de Pago o Chatbots avanzados sin rediseñar desde cero.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container cta-wrapper">
+        <div class="cta-card">
+            <h2>¿Listo para Crear el Futuro?</h2>
+            <p>Hablemos de tus requerimientos técnicos y empecemos a dar forma a tu visión digital hoy mismo.</p>
+            <a href="https://wa.me/525653915739?text=Hola%2C%20estoy%20interesado%20en%20solicitar%20una%20p%C3%A1gina%20web.%20Vi%20sus%20precios%20en%20el%20sitio%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n." class="cta-btn-main" target="_blank">
+                <i class="fab fa-whatsapp"></i> Iniciar Cotización Gratis
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="cyber-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Az InnovationX</h3>
+                    <p>Diseñamos, desarrollamos y blindamos soluciones de software de alto impacto y automatizaciones inteligentes adaptadas a las marcas del mañana.</p>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Enlaces Rápidos</h4>
                     <ul>
                         <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Servicios</a></li>
-                        <li><a href="#">Portafolio</a></li>
-                        <li><a href="#">Testimonios</a></li>
-                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#precios">Precios</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="#faq">Preguntas Frecuentes</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Contacto</h3>
+                <div class="footer-contact-col">
+                    <h4>Contacto Oficial</h4>
                     <ul>
                         <li><i class="fas fa-envelope"></i> soporteseguro98@gmail.com</li>
                         <li><i class="fas fa-phone"></i> +52 56 53 91 57 39</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Estado de Mexico, Huixquilucan</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Huixquilucan, Estado de México</li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
+            
+            <div class="footer-bottom">
                 <p>&copy; 2026 Tu Az InnovationX. Todos los derechos reservados.</p>
+                <div style="display: flex; gap: 20px;">
+                    <a href="#">Términos de Servicio</a>
+                    <a href="#">Privacidad</a>
+                </div>
             </div>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/525653915739?text=Hola%2C%20estoy%20interesado%20en%20solicitar%20una%20p%C3%A1gina%20web.%20Vi%20sus%20precios%20en%20el%20sitio%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n." class="whatsapp-float" target="_blank" aria-label="Chat con soporte en WhatsApp">
+        <div class="whatsapp-float-pulse"></div>
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts: Three.js and Interactive Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // -------------------------------------------------------------
+        // 1. THREE.JS INTERACTIVE BACKGROUND
+        // -------------------------------------------------------------
+        const initThreeBackground = () => {
+            const canvas = document.getElementById('bg-canvas');
+            if (!canvas) return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+            
+            const renderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                alpha: true,
+                antialias: true
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Elementos de partículas
+            const count = 300;
+            const positions = new Float32Array(count * 3);
+            const colors = new Float32Array(count * 3);
+
+            const colorCyan = new THREE.Color('#06b6d4');
+            const colorPurple = new THREE.Color('#6366f1');
+
+            for (let i = 0; i < count; i++) {
+                // Posicionamiento aleatorio en esfera
+                const radius = 6 + Math.random() * 20;
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos((Math.random() * 2) - 1);
+
+                positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+                positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+                positions[i * 3 + 2] = radius * Math.cos(phi);
+
+                // Alternancia de colores cian/morado
+                const mixedColor = Math.random() > 0.5 ? colorCyan : colorPurple;
+                colors[i * 3] = mixedColor.r;
+                colors[i * 3 + 1] = mixedColor.g;
+                colors[i * 3 + 2] = mixedColor.b;
+            }
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            // Textura circular de punto
+            const pMaterial = new THREE.PointsMaterial({
+                size: 0.18,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.7,
+                blending: THREE.AdditiveBlending
+            });
+
+            const points = new THREE.Points(geometry, pMaterial);
+            scene.add(points);
+
+            camera.position.z = 10;
+
+            // Interacción de mouse
+            let mouseX = 0;
+            let mouseY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) - 0.5;
+                mouseY = (e.clientY / window.innerHeight) - 0.5;
+            });
+
+            // Loop de Animación
+            const clock = new THREE.Clock();
+
+            const tick = () => {
+                const elapsedTime = clock.getElapsedTime();
+
+                // Rotación sutil
+                points.rotation.y = elapsedTime * 0.05;
+                points.rotation.x = elapsedTime * 0.02;
+
+                // Rotación basada en cursor
+                points.rotation.y += mouseX * 0.2;
+                points.rotation.x += -mouseY * 0.2;
+
+                renderer.render(scene, camera);
+                window.requestAnimationFrame(tick);
+            };
+
+            tick();
+
+            // Resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            });
+        };
+
+        // -------------------------------------------------------------
+        // 2. 3D PERSPECTIVE TILT EFFECT ON CARDS
+        // -------------------------------------------------------------
+        const initCardTilt = () => {
+            const cards = document.querySelectorAll('.pricing-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const width = rect.width;
+                    const height = rect.height;
+                    
+                    // Cálculo de inclinación
+                    const rotateX = ((y / height) - 0.5) * -15; // Max 15deg
+                    const rotateY = ((x / width) - 0.5) * 15;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+                    
+                    // Efecto de reflejo (glare)
+                    const glare = card.querySelector('.glare');
+                    if (glare) {
+                        const px = (x / width) * 100;
+                        const py = (y / height) * 100;
+                        glare.style.background = `radial-gradient(circle at ${px}% ${py}%, rgba(255, 255, 255, 0.12) 0%, transparent 60%)`;
+                    }
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+                    const glare = card.querySelector('.glare');
+                    if (glare) {
+                        glare.style.background = 'transparent';
+                    }
+                });
+            });
+        };
+
+        // -------------------------------------------------------------
+        // 3. TABS FILTER LOGIC
+        // -------------------------------------------------------------
+        const initTabsFilter = () => {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const cardContainers = document.querySelectorAll('.pricing-card-container');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Actualiza estados activos
+                    tabs.forEach(t => {
+                        t.classList.remove('active');
+                        t.setAttribute('aria-selected', 'false');
+                    });
+                    tab.classList.add('active');
+                    tab.setAttribute('aria-selected', 'true');
+
+                    const selectedCategory = tab.getAttribute('data-tab');
+
+                    // Animar filtros
+                    cardContainers.forEach(container => {
+                        const category = container.getAttribute('data-category');
+                        
+                        container.style.opacity = '0';
+                        container.style.transform = 'scale(0.9) translateY(15px)';
+
+                        setTimeout(() => {
+                            if (selectedCategory === 'all' || category === selectedCategory) {
+                                container.style.display = 'block';
+                                setTimeout(() => {
+                                    container.style.opacity = '1';
+                                    container.style.transform = 'scale(1) translateY(0)';
+                                }, 50);
+                            } else {
+                                container.style.display = 'none';
+                            }
+                        }, 250);
+                    });
+                });
+            });
+        };
+
+        // -------------------------------------------------------------
+        // 4. CURRENCY DYNAMIC SWITCH
+        // -------------------------------------------------------------
+        const initCurrencySwitch = () => {
+            const toggle = document.getElementById('currency-toggle');
+            const prices = document.querySelectorAll('.pricing-price');
+            const labelMxn = document.getElementById('label-mxn');
+            const labelUsd = document.getElementById('label-usd');
+
+            if (!toggle) return;
+
+            toggle.addEventListener('change', () => {
+                const isUSD = toggle.checked;
+
+                if (isUSD) {
+                    labelMxn.classList.remove('active');
+                    labelUsd.classList.add('active');
+                } else {
+                    labelMxn.classList.add('active');
+                    labelUsd.classList.remove('active');
+                }
+
+                prices.forEach(price => {
+                    price.style.opacity = '0';
+                    price.style.transform = 'translateY(10px)';
+
+                    setTimeout(() => {
+                        if (isUSD) {
+                            price.innerHTML = price.getAttribute('data-usd');
+                        } else {
+                            price.innerHTML = price.getAttribute('data-mxn');
+                        }
+                        price.style.opacity = '1';
+                        price.style.transform = 'translateY(0)';
+                    }, 200);
+                });
+            });
+        };
+
+        // -------------------------------------------------------------
+        // 5. ACCORDION FAQ LOGIC
+        // -------------------------------------------------------------
+        const initFaqAccordion = () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+
+                    // Cierra todos los demás
+                    faqItems.forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                    });
+
+                    if (!isActive) {
+                        item.classList.add('active');
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                    }
+                });
+            });
+        };
+
+        // -------------------------------------------------------------
+        // INITIALIZATION
+        // -------------------------------------------------------------
+        document.addEventListener('DOMContentLoaded', () => {
+            initThreeBackground();
+            initCardTilt();
+            initTabsFilter();
+            initCurrencySwitch();
+            initFaqAccordion();
+        });
+    </script>
 </body>
 </html>
