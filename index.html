@@ -988,38 +988,137 @@
                 gap: 40px;
             }
             h1.hero-title {
-                font-size: 3rem;
+                font-size: 3.2rem;
+            }
+            .pricing-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             }
         }
 
         @media (max-width: 768px) {
+            /* Mobile Navbar Hamburger & Menu overlay */
+            .nav-toggle {
+                display: block !important;
+                background: transparent;
+                border: none;
+                color: var(--primary-text-color);
+                font-size: 1.5rem;
+                cursor: pointer;
+                z-index: 110;
+                transition: color 0.3s;
+            }
+            .nav-toggle:hover {
+                color: var(--accent-cyan);
+            }
             .nav-links {
-                display: none;
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(8, 8, 16, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-left: 1px solid var(--border-color);
+                padding: 100px 40px;
+                gap: 30px;
+                transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+                z-index: 105;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            }
+            .nav-links.active {
+                right: 0;
             }
             
             .controls-section {
                 flex-direction: column;
                 align-items: stretch;
+                padding: 15px 20px;
+                gap: 15px;
             }
 
+            /* Horizontal scrollable tabs control on mobile */
             .tabs-menu {
-                justify-content: center;
+                justify-content: flex-start !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                width: 100%;
+                padding-bottom: 5px;
+            }
+            .tabs-menu::-webkit-scrollbar {
+                display: none;
+            }
+            .tab-btn {
+                flex: 0 0 auto;
+                padding: 8px 16px;
             }
 
             .currency-switch {
                 align-self: center;
+                margin-top: 5px;
             }
 
             .pricing-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
 
             h1.hero-title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+                line-height: 1.2;
+            }
+            .hero-subtitle {
+                font-size: 1.05rem;
+            }
+            .hero {
+                padding: 60px 0 40px 0;
             }
 
             .cta-card {
                 padding: 50px 20px;
+            }
+            .cta-card h2 {
+                font-size: 2rem;
+            }
+            .cta-card p {
+                font-size: 1rem;
+            }
+
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+            .faq-question {
+                padding: 20px 24px;
+            }
+            .faq-answer p {
+                padding: 0 24px 20px 24px;
+            }
+
+            .testimonial-card {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pricing-card {
+                padding: 30px 20px;
+            }
+            .pricing-price {
+                font-size: 1.8rem;
+            }
+            .container {
+                padding: 0 16px;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 25px;
+                right: 25px;
+                font-size: 1.6rem;
             }
         }
     </style>
@@ -1048,9 +1147,14 @@
                 <li><a href="#testimonios">Testimonios</a></li>
                 <li><a href="#faq">FAQ</a></li>
             </ul>
-            <a href="https://wa.me/525653915739?text=Hola%2C%20estoy%20interesado%20en%20solicitar%20una%20p%C3%A1gina%20web.%20Vi%20sus%20precios%20en%20el%20sitio%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n." class="nav-cta" target="_blank">
-                Contratar ahora
-            </a>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <a href="https://wa.me/525653915739?text=Hola%2C%20estoy%20interesado%20en%20solicitar%20una%20p%C3%A1gina%20web.%20Vi%20sus%20precios%20en%20el%20sitio%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n." class="nav-cta" target="_blank">
+                    Contratar ahora
+                </a>
+                <button class="nav-toggle" aria-label="Abrir menú de navegación" style="display: none;">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -1849,6 +1953,33 @@
         };
 
         // -------------------------------------------------------------
+        // 6. MOBILE NAVIGATION LOGIC
+        // -------------------------------------------------------------
+        const initMobileNav = () => {
+            const toggleBtn = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            if (!toggleBtn || !navLinks) return;
+
+            const toggleIcon = toggleBtn.querySelector('i');
+
+            toggleBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                if (navLinks.classList.contains('active')) {
+                    toggleIcon.className = 'fas fa-times';
+                } else {
+                    toggleIcon.className = 'fas fa-bars';
+                }
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    toggleIcon.className = 'fas fa-bars';
+                });
+            });
+        };
+
+        // -------------------------------------------------------------
         // INITIALIZATION
         // -------------------------------------------------------------
         document.addEventListener('DOMContentLoaded', () => {
@@ -1857,6 +1988,7 @@
             initTabsFilter();
             initCurrencySwitch();
             initFaqAccordion();
+            initMobileNav();
         });
     </script>
 </body>
