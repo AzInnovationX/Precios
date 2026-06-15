@@ -189,6 +189,11 @@
             transform: translateY(-2px);
         }
 
+        /* CTA dentro del menú móvil: oculto en escritorio */
+        .nav-cta-mobile-item {
+            display: none;
+        }
+
         /* Botón de menú hamburguesa (oculto por defecto en escritorio) */
         .nav-toggle {
             display: none;
@@ -437,6 +442,26 @@
         }
         .card-depth-3 {
             transform: translateZ(55px);
+        }
+
+        /* En dispositivos táctiles (celulares y tablets) desactivamos la
+           profundidad 3D de las tarjetas. El efecto "tilt" solo aplica con
+           mouse (ver initCardTilt), así que en táctil esta perspectiva no
+           aporta nada y, en cambio, en Safari/iOS puede causar que el área
+           "clickeable" de los botones quede desalineada de su posición
+           visual al hacer scroll, dejando botones que "no responden". */
+        @media (hover: none), (pointer: coarse) {
+            .pricing-grid {
+                perspective: none;
+            }
+            .pricing-card {
+                transform-style: flat;
+            }
+            .card-depth-1,
+            .card-depth-2,
+            .card-depth-3 {
+                transform: none;
+            }
         }
 
         .pricing-card::before {
@@ -1047,9 +1072,31 @@
             .nav-toggle {
                 display: flex;
             }
+            /* En móvil ocultamos el botón "Contratar ahora" del header
+               (no cabe junto al logo y el menú hamburguesa) y mostramos
+               una versión equivalente dentro del menú lateral. */
+            .nav-container > div:last-child > .nav-cta {
+                display: none;
+            }
+            .nav-cta-mobile-item {
+                display: block;
+                width: 100%;
+                margin-top: 10px;
+            }
+            .nav-cta-mobile {
+                display: block;
+                text-align: center;
+                width: 100%;
+                padding: 14px 22px;
+            }
+            .logo {
+                font-size: 1.25rem;
+                white-space: nowrap;
+            }
             .nav-links {
                 display: flex;
                 flex-direction: column;
+                align-items: flex-start;
                 position: fixed;
                 top: 0;
                 right: -100%;
@@ -1183,6 +1230,11 @@
                 <li><a href="#precios">Precios</a></li>
                 <li><a href="#testimonios">Testimonios</a></li>
                 <li><a href="#faq">FAQ</a></li>
+                <li class="nav-cta-mobile-item">
+                    <a href="https://wa.me/525653915739?text=Hola%2C%20estoy%20interesado%20en%20solicitar%20una%20p%C3%A1gina%20web.%20Vi%20sus%20precios%20en%20el%20sitio%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n." class="nav-cta nav-cta-mobile" target="_blank" rel="noopener noreferrer">
+                        Contratar ahora
+                    </a>
+                </li>
             </ul>
             <div style="display: flex; align-items: center; gap: 15px;">
                 <a href="https://wa.me/525653915739?text=Hola%2C%20estoy%20interesado%20en%20solicitar%20una%20p%C3%A1gina%20web.%20Vi%20sus%20precios%20en%20el%20sitio%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n." class="nav-cta" target="_blank" rel="noopener noreferrer">
