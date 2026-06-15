@@ -8,6 +8,9 @@
     <!-- Meta tags de SEO -->
     <meta name="description" content="Tarifas y planes oficiales de Az InnovationX. Páginas web profesionales, chatbots con IA y seguridad digital para tu negocio.">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#05050a">
+    <meta name="color-scheme" content="dark">
+    <meta name="format-detection" content="telephone=no">
     
     <!-- Iconos y Fuentes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -184,6 +187,36 @@
             color: white;
             box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
             transform: translateY(-2px);
+        }
+
+        /* Botón de menú hamburguesa (oculto por defecto en escritorio) */
+        .nav-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--primary-text-color);
+            font-size: 1.3rem;
+            cursor: pointer;
+            position: relative;
+            z-index: 110;
+            transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .nav-toggle:hover,
+        .nav-toggle:focus-visible {
+            color: var(--accent-cyan);
+            border-color: var(--border-color-active);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Bloquea el scroll del body cuando el menú móvil está abierto */
+        body.nav-open {
+            overflow: hidden;
         }
 
         /* Hero Section */
@@ -1012,17 +1045,7 @@
         @media (max-width: 768px) {
             /* Mobile Navbar Hamburger & Menu overlay */
             .nav-toggle {
-                display: block !important;
-                background: transparent;
-                border: none;
-                color: var(--primary-text-color);
-                font-size: 1.5rem;
-                cursor: pointer;
-                z-index: 110;
-                transition: color 0.3s;
-            }
-            .nav-toggle:hover {
-                color: var(--accent-cyan);
+                display: flex;
             }
             .nav-links {
                 display: flex;
@@ -1165,7 +1188,7 @@
                 <a href="https://wa.me/525653915739?text=Hola%2C%20estoy%20interesado%20en%20solicitar%20una%20p%C3%A1gina%20web.%20Vi%20sus%20precios%20en%20el%20sitio%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n." class="nav-cta" target="_blank" rel="noopener noreferrer">
                     Contratar ahora
                 </a>
-                <button class="nav-toggle" aria-label="Abrir menú de navegación" style="display: none;">
+                <button class="nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
@@ -1771,19 +1794,41 @@
             const canvas = document.getElementById('bg-canvas');
             if (!canvas) return;
 
+            // Si Three.js no cargó (CDN bloqueado/lento) o el usuario prefiere
+            // menos movimiento, ocultamos el canvas y no hacemos nada más.
+            // Esto evita que un error aquí detenga la inicialización de los
+            // botones, pestañas, FAQ, menú móvil, etc.
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (typeof THREE === 'undefined' || prefersReducedMotion) {
+                canvas.style.display = 'none';
+                return;
+            }
+
+            const isMobile = window.innerWidth <= 768;
+
+            let renderer;
+            try {
+                renderer = new THREE.WebGLRenderer({
+                    canvas: canvas,
+                    alpha: true,
+                    antialias: !isMobile
+                });
+            } catch (err) {
+                // Algunos navegadores/dispositivos no soportan WebGL.
+                console.warn('Fondo 3D desactivado (WebGL no disponible):', err);
+                canvas.style.display = 'none';
+                return;
+            }
+
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
-            
-            const renderer = new THREE.WebGLRenderer({
-                canvas: canvas,
-                alpha: true,
-                antialias: true
-            });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-            // Elementos de partículas
-            const count = 300;
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
+
+            // Menos partículas en móvil para mejorar el rendimiento y la batería
+            const count = isMobile ? 120 : 300;
             const positions = new Float32Array(count * 3);
             const colors = new Float32Array(count * 3);
 
@@ -1825,19 +1870,25 @@
 
             camera.position.z = 10;
 
-            // Interacción de mouse
+            // Interacción de mouse (solo en dispositivos con puntero tipo mouse)
             let mouseX = 0;
             let mouseY = 0;
 
-            document.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX / window.innerWidth) - 0.5;
-                mouseY = (e.clientY / window.innerHeight) - 0.5;
-            });
+            if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = (e.clientX / window.innerWidth) - 0.5;
+                    mouseY = (e.clientY / window.innerHeight) - 0.5;
+                });
+            }
 
             // Loop de Animación
             const clock = new THREE.Clock();
+            let isRunning = true;
+            let frameId = null;
 
             const tick = () => {
+                if (!isRunning) return;
+
                 const elapsedTime = clock.getElapsedTime();
 
                 // Rotación sutil
@@ -1849,17 +1900,30 @@
                 points.rotation.x += -mouseY * 0.2;
 
                 renderer.render(scene, camera);
-                window.requestAnimationFrame(tick);
+                frameId = window.requestAnimationFrame(tick);
             };
 
             tick();
+
+            // Pausa la animación cuando la pestaña no está visible
+            // para ahorrar batería y CPU en celulares.
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    isRunning = false;
+                    if (frameId) cancelAnimationFrame(frameId);
+                } else if (!isRunning) {
+                    isRunning = true;
+                    clock.getDelta(); // evita saltos al reanudar
+                    tick();
+                }
+            });
 
             // Resize
             window.addEventListener('resize', () => {
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth <= 768 ? 1.5 : 2));
             });
         };
 
@@ -1867,6 +1931,11 @@
         // 2. 3D PERSPECTIVE TILT EFFECT ON CARDS
         // -------------------------------------------------------------
         const initCardTilt = () => {
+            // En táctil no hay "mousemove" real; evitamos el efecto para
+            // no afectar el rendimiento ni dejar tarjetas con un transform
+            // residual tras un toque.
+            if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
             const cards = document.querySelectorAll('.pricing-card');
             
             cards.forEach(card => {
@@ -1994,20 +2063,46 @@
                 const question = item.querySelector('.faq-question');
                 const answer = item.querySelector('.faq-answer');
 
-                question.addEventListener('click', () => {
+                // Accesibilidad: permite abrir/cerrar con teclado (Enter / Espacio)
+                question.setAttribute('tabindex', '0');
+                question.setAttribute('role', 'button');
+                question.setAttribute('aria-expanded', 'false');
+
+                const toggleItem = () => {
                     const isActive = item.classList.contains('active');
 
                     // Cierra todos los demás
                     faqItems.forEach(otherItem => {
                         otherItem.classList.remove('active');
                         otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                        otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
                     });
 
                     if (!isActive) {
                         item.classList.add('active');
                         answer.style.maxHeight = answer.scrollHeight + 'px';
+                        question.setAttribute('aria-expanded', 'true');
+                    }
+                };
+
+                question.addEventListener('click', toggleItem);
+                question.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+                        e.preventDefault();
+                        toggleItem();
                     }
                 });
+            });
+
+            // Recalcula la altura del panel abierto al cambiar el tamaño de
+            // pantalla (por ejemplo, al rotar una tablet), para que el texto
+            // no quede recortado.
+            window.addEventListener('resize', () => {
+                const activeItem = document.querySelector('.faq-item.active');
+                if (activeItem) {
+                    const answer = activeItem.querySelector('.faq-answer');
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                }
             });
         };
 
@@ -2021,20 +2116,46 @@
 
             const toggleIcon = toggleBtn.querySelector('i');
 
+            const closeMenu = () => {
+                navLinks.classList.remove('active');
+                document.body.classList.remove('nav-open');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                if (toggleIcon) toggleIcon.className = 'fas fa-bars';
+            };
+
+            const openMenu = () => {
+                navLinks.classList.add('active');
+                document.body.classList.add('nav-open');
+                toggleBtn.setAttribute('aria-expanded', 'true');
+                if (toggleIcon) toggleIcon.className = 'fas fa-times';
+            };
+
             toggleBtn.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
                 if (navLinks.classList.contains('active')) {
-                    toggleIcon.className = 'fas fa-times';
+                    closeMenu();
                 } else {
-                    toggleIcon.className = 'fas fa-bars';
+                    openMenu();
                 }
             });
 
             navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                    toggleIcon.className = 'fas fa-bars';
-                });
+                link.addEventListener('click', closeMenu);
+            });
+
+            // Cierra el menú con la tecla Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                    closeMenu();
+                }
+            });
+
+            // Si la pantalla crece (ej. rotar a horizontal o pasar a escritorio)
+            // y el menú móvil estaba abierto, lo cerramos para evitar overlays
+            // que bloqueen el contenido en pantallas grandes.
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+                    closeMenu();
+                }
             });
         };
 
@@ -2042,12 +2163,23 @@
         // INITIALIZATION
         // -------------------------------------------------------------
         document.addEventListener('DOMContentLoaded', () => {
-            initThreeBackground();
-            initCardTilt();
-            initTabsFilter();
-            initCurrencySwitch();
-            initFaqAccordion();
-            initMobileNav();
+            const safeInit = (fn, label) => {
+                try {
+                    fn();
+                } catch (err) {
+                    // Si una función falla (por ejemplo, por una librería externa
+                    // que no cargó), el resto de los botones/funciones del sitio
+                    // siguen funcionando con normalidad.
+                    console.error(`Az InnovationX: error al iniciar "${label}":`, err);
+                }
+            };
+
+            safeInit(initThreeBackground, 'fondo 3D');
+            safeInit(initCardTilt, 'efecto 3D de tarjetas');
+            safeInit(initTabsFilter, 'filtros de categorías');
+            safeInit(initCurrencySwitch, 'cambio de divisa');
+            safeInit(initFaqAccordion, 'acordeón de preguntas frecuentes');
+            safeInit(initMobileNav, 'menú móvil');
         });
     </script>
 </body>
